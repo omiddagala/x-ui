@@ -1,0 +1,113 @@
+<nb-card>
+  <nb-card-header style="text-align: right">بیمه شخص ثالث - اطلاعات لازم را وارد کنید</nb-card-header>
+  <nb-card-body style="direction: rtl">
+    <form (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group" style="text-align: right">
+            <label for="provinent" class="label">استان</label>
+            <input type="text" nbInput fullWidth id="provinent">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group" style="text-align: right">
+            <label for="city" class="label">شهر</label>
+            <input type="text" nbInput fullWidth id="city">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group" style="text-align: right">
+            <label for="nationalCode" class="label">کد ملی</label>
+            <input type="text" nbInput fullWidth id="nationalCode">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group" style="text-align: right">
+            <label for="mobile" class="label">موبایل</label>
+            <input type="text" nbInput fullWidth id="mobile">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group" style="text-align: right">
+            <label for="phone" class="label">تلفن ثابت</label>
+            <input type="text" nbInput fullWidth id="phone">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group" style="text-align: right">
+            <label for="email" class="label">ایمیل</label>
+            <input type="text" nbInput fullWidth id="email">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group" style="text-align: right">
+            <label for="postalCode" class="label">کد پستی</label>
+            <input type="text" nbInput fullWidth id="postalCode">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group" style="text-align: right">
+            <label for="adr" class="label">آدرس</label>
+            <textarea rows="3" id="adr" nbInput fullWidth shape="round"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group" style="text-align: right">
+            <nb-checkbox style="margin-left: 1rem"><span>&nbsp;&nbsp;&nbsp;</span><span>جهت ارسال تصاویر مدارک با ایمیل یا تلگرام کلیک کنید</span>
+            </nb-checkbox>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="form-group" style="text-align: right">
+            <label for="frontOfCardImage">تصویر روی کارت ماشین</label>
+            <input hidden type="file" #uploader1 id="frontOfCardImage">
+            <br>
+            <img src="/assets/images/upload.png" style="width: 100px" (click)="uploader1.click()">
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-group" style="text-align: right">
+            <label for="backOfCardImage">تصویر پشت کارت ماشین</label>
+            <input hidden type="file" #uploader2 id="backOfCardImage">
+            <br>
+            <img src="/assets/images/upload.png" style="width: 100px" (click)="uploader2.click()">
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-group" style="text-align: right">
+            <label for="nationalCardImage">تصویر کارت ملی</label>
+            <input hidden type="file" #uploader3 id="nationalCardImage">
+            <br>
+            <img src="/assets/images/upload.png" style="width: 100px" (click)="uploader3.click()">
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-group" style="text-align: right">
+            <label for="insuranceImage">تصویر کامل بیمه نامه</label>
+            <input hidden type="file" #uploader4 id="insuranceImage">
+            <br>
+            <img src="/assets/images/upload.png" style="width: 100px" (click)="uploader4.click()">
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" nbButton>ثبت سفارش و پرداخت</button>
+    </form>
+  </nb-card-body>
+</nb-card>
+<style>
+  .select-button {
+    text-align: right;
+    direction: rtl;
+  }
+</style>

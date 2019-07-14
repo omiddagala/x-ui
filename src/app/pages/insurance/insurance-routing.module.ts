@@ -3,6 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {InsuranceMenuComponent} from './home/insurance-menu.component';
 import {ThirdPersonCompaniesComponent} from './third-person/list/third-person-companies.component';
 import {InquiryComponent} from './third-person/inquiry/inquiry.component';
+import {ThirdPersonSubmissionComponent} from './third-person/submission/third-person-submission.component';
 
 
 const routes: Routes = [{
@@ -14,6 +15,9 @@ const routes: Routes = [{
 }, {
   path: 'inquiry',
   component: InquiryComponent,
+}, {
+  path: 'third-person-submission',
+  component: ThirdPersonSubmissionComponent,
 }];
 
 @NgModule({

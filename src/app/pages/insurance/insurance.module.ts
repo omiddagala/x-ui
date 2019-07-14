@@ -17,6 +17,7 @@ import {CustomButtonComponent} from './third-person/list/custom-button.component
 import {InquiryComponent} from './third-person/inquiry/inquiry.component';
 import {SmsPopupComponent} from './third-person/inquiry/sms-popup/sms-popup.component';
 import {FormsModule} from '@angular/forms';
+import {ThirdPersonSubmissionComponent} from './third-person/submission/third-person-submission.component';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import {FormsModule} from '@angular/forms';
     CustomButtonComponent,
     InquiryComponent,
     SmsPopupComponent,
+    ThirdPersonSubmissionComponent,
   ],
   providers: [
     MyRoutingService,
