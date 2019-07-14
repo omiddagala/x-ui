@@ -1,83 +1,86 @@
 <nb-card>
   <nb-card-header style="text-align: right">بیمه شخص ثالث - اطلاعات لازم را وارد کنید</nb-card-header>
   <nb-card-body style="direction: rtl">
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="form-group" style="text-align: right">
-          <label for="carType" class="label">نوع خودرو(برند خودرو)</label>
-          <nb-select fullWidth id="carType" placeholder="نوع خودرو را انتخاب کنید">
-            <nb-option style="text-align: right;direction: rtl" value="1">پژو</nb-option>
-            <nb-option style="text-align: right;direction: rtl" value="2">هیوندا</nb-option>
-            <nb-option style="text-align: right;direction: rtl" value="3">تویوتا</nb-option>
-            <nb-option style="text-align: right;direction: rtl" value="4">بنز</nb-option>
-          </nb-select>
+    <form (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group" style="text-align: right">
+            <label for="carType" class="label">نوع خودرو(برند خودرو)</label>
+            <nb-select fullWidth id="carType" placeholder="نوع خودرو را انتخاب کنید">
+              <nb-option style="text-align: right;direction: rtl" value="1">پژو</nb-option>
+              <nb-option style="text-align: right;direction: rtl" value="2">هیوندا</nb-option>
+              <nb-option style="text-align: right;direction: rtl" value="3">تویوتا</nb-option>
+              <nb-option style="text-align: right;direction: rtl" value="4">بنز</nb-option>
+            </nb-select>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group" style="text-align: right">
+            <label for="carModel" class="label">مدل خودرو(ابتدا نوع خودرو را انتخاب کنید)</label>
+            <nb-select fullWidth id="carModel" placeholder="مدل خودرو را انتخاب کنید">
+              <nb-option style="text-align: right;direction: rtl" value="1">206</nb-option>
+              <nb-option style="text-align: right;direction: rtl" value="2">405</nb-option>
+              <nb-option style="text-align: right;direction: rtl" value="3">2008</nb-option>
+              <nb-option style="text-align: right;direction: rtl" value="4">روآ</nb-option>
+            </nb-select>
+          </div>
         </div>
       </div>
-      <div class="col-sm-6">
-        <div class="form-group" style="text-align: right">
-          <label for="carModel" class="label">مدل خودرو(ابتدا نوع خودرو را انتخاب کنید)</label>
-          <nb-select fullWidth id="carModel" placeholder="مدل خودرو را انتخاب کنید">
-            <nb-option style="text-align: right;direction: rtl" value="1">206</nb-option>
-            <nb-option style="text-align: right;direction: rtl" value="2">405</nb-option>
-            <nb-option style="text-align: right;direction: rtl" value="3">2008</nb-option>
-            <nb-option style="text-align: right;direction: rtl" value="4">روآ</nb-option>
-          </nb-select>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group" style="text-align: right">
+            <label for="buildDate" class="label">سال ساخت</label>
+            <nb-select fullWidth id="buildDate" placeholder="سال ساخت را انتخاب کنید">
+              <nb-option style="text-align: right;direction: rtl" value="1">1394</nb-option>
+              <nb-option style="text-align: right;direction: rtl" value="2">1395</nb-option>
+              <nb-option style="text-align: right;direction: rtl" value="3">1396</nb-option>
+              <nb-option style="text-align: right;direction: rtl" value="4">1397</nb-option>
+            </nb-select>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group" style="text-align: right">
+            <label for="offDate" class="label">میزان تخفیف(به سال)</label>
+            <nb-select fullWidth id="offDate" placeholder="تعداد سال تخفیف را انتخاب کنید">
+              <nb-option style="text-align: right;direction: rtl" value="1">1</nb-option>
+              <nb-option style="text-align: right;direction: rtl" value="2">2</nb-option>
+              <nb-option style="text-align: right;direction: rtl" value="3">3</nb-option>
+              <nb-option style="text-align: right;direction: rtl" value="4">4</nb-option>
+            </nb-select>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="form-group" style="text-align: right">
-          <label for="buildDate" class="label">سال ساخت</label>
-          <nb-select fullWidth id="buildDate" placeholder="سال ساخت را انتخاب کنید">
-            <nb-option style="text-align: right;direction: rtl" value="1">1394</nb-option>
-            <nb-option style="text-align: right;direction: rtl" value="2">1395</nb-option>
-            <nb-option style="text-align: right;direction: rtl" value="3">1396</nb-option>
-            <nb-option style="text-align: right;direction: rtl" value="4">1397</nb-option>
-          </nb-select>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group" style="text-align: right">
+            <label for="coverage" class="label">پوشش مالی</label>
+            <nb-select fullWidth id="coverage" placeholder="پوشش مالی را انتخاب کنید">
+              <nb-option style="text-align: right;direction: rtl" value="1">5 میلیون تومان</nb-option>
+              <nb-option style="text-align: right;direction: rtl" value="2">7 میلیون تومان</nb-option>
+              <nb-option style="text-align: right;direction: rtl" value="3">9 میلیون تومان</nb-option>
+              <nb-option style="text-align: right;direction: rtl" value="4">12 میلیون تومان</nb-option>
+            </nb-select>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group" style="text-align: right">
+            <label for="endDate" class="label">تاریخ اتمام بیمه نامه قبلی</label>
+            <input type="text" nbInput fullWidth id="endDate" placeholder="--/--/--">
+          </div>
         </div>
       </div>
-      <div class="col-sm-6">
-        <div class="form-group" style="text-align: right">
-          <label for="offDate" class="label">میزان تخفیف(به سال)</label>
-          <nb-select fullWidth id="offDate" placeholder="تعداد سال تخفیف را انتخاب کنید">
-            <nb-option style="text-align: right;direction: rtl" value="1">1</nb-option>
-            <nb-option style="text-align: right;direction: rtl" value="2">2</nb-option>
-            <nb-option style="text-align: right;direction: rtl" value="3">3</nb-option>
-            <nb-option style="text-align: right;direction: rtl" value="4">4</nb-option>
-          </nb-select>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group" style="text-align: right">
+            <nb-checkbox style="margin-left: 1rem"><span>&nbsp;&nbsp;&nbsp;</span><span>قوانین و مقررات سایت و بیمه را مطالعه نموده و قبول دارم</span>
+            </nb-checkbox>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="form-group" style="text-align: right">
-          <label for="coverage" class="label">پوشش مالی</label>
-          <nb-select fullWidth id="coverage" placeholder="پوشش مالی را انتخاب کنید">
-            <nb-option style="text-align: right;direction: rtl" value="1">5 میلیون تومان</nb-option>
-            <nb-option style="text-align: right;direction: rtl" value="2">7 میلیون تومان</nb-option>
-            <nb-option style="text-align: right;direction: rtl" value="3">9 میلیون تومان</nb-option>
-            <nb-option style="text-align: right;direction: rtl" value="4">12 میلیون تومان</nb-option>
-          </nb-select>
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="form-group" style="text-align: right">
-          <label for="endDate" class="label">تاریخ اتمام بیمه نامه قبلی</label>
-          <input type="text" nbInput fullWidth id="endDate" placeholder="--/--/--">
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="form-group" style="text-align: right">
-          <nb-checkbox style="margin-left: 1rem"><span>&nbsp;&nbsp;&nbsp;</span><span>قوانین و مقررات سایت و بیمه را مطالعه نموده و قبول دارم</span></nb-checkbox>
-        </div>
-      </div>
-    </div>
 
-    <button nbButton style="margin-left: 15px" (click)="openSmsInquiryPopup()">ارسال کد پیامکی</button>
-    <button type="submit" nbButton>استعلام آنلاین</button>
+      <button nbButton style="margin-left: 15px" (click)="openSmsInquiryPopup()">ارسال کد پیامکی</button>
+      <button type="submit" nbButton>استعلام آنلاین</button>
+    </form>
   </nb-card-body>
 </nb-card>
 <style>

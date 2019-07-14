@@ -17,6 +17,10 @@ export class InquiryComponent {
       // .onClose.subscribe(name => alert(name));
   }
 
+  onSubmit() {
+    this.myRoutingService.gotoWhereClicked('/pages/insurance/third-person-companies');
+  }
+
   gotoWhereClicked(adr) {
     this.myRoutingService.gotoWhereClicked(adr);
   }

@@ -13,7 +13,7 @@ export class CustomButtonComponent implements ViewCell {
   @Input() value: string; // This will be the value passed from the pathID column (see next code block)
   @Input() rowData: any;
   navigateToSomeRoute() {
-    this.router.navigate(['/pages/insurance/inquiry']);
+    this.router.navigate(['/pages/insurance/third-person']);
     // alert(this.rowData.id);
   }
 }

@@ -5,9 +5,9 @@ import {CustomButtonComponent} from './custom-button.component';
 @Component({
   selector: 'ngx-ref-insurance-third-person',
   styleUrls: ['third-person.scss'],
-  templateUrl: './third-person.component.html',
+  templateUrl: './third-person-companies.component.html',
 })
-export class ThirdPersonComponent {
+export class ThirdPersonCompaniesComponent {
   settings = {
     actions: {
       add: false,
