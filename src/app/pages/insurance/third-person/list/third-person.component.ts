@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {LocalDataSource} from 'ng2-smart-table';
-import {SmartTableData} from '../../../@core/data/smart-table';
 import {CustomButtonComponent} from './custom-button.component';
 
 @Component({
@@ -70,7 +69,7 @@ export class ThirdPersonComponent {
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private service: SmartTableData) {
+  constructor() {
     const data = [{
       id: 100,
       customerFeedback: '/assets/images/rating.png',
