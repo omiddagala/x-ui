@@ -1,0 +1,47 @@
+.menu-pics {
+  width: 135px;
+  height: 135px;
+  border-radius: 50%;
+  background-size: 100% 100% !important;
+  margin-bottom: 2rem;
+}
+.menu-bottom-text {
+  margin-bottom: 0 !important;
+  padding: 0 0 0.5rem !important;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: 0;
+}
+nb-card[_ngcontent-ymx-c22] {
+  &:hover {
+    -webkit-box-shadow: 0 15px 37px 0 #dbe2eb;
+    box-shadow: 0 15px 37px 0 #dbe2eb;
+    -webkit-transform: translateY(-1rem);
+    transform: translateY(-1rem);
+  }
+  -webkit-box-shadow: 0 4px 27px 0 rgba(230, 234, 240, 0.2);
+  box-shadow: 0 4px 27px 0 rgba(230, 234, 240, 0.2);
+  -webkit-transition: -webkit-transform 0.25s;
+  transition: -webkit-transform 0.25s ease;
+  transition: transform 0.25s ease;
+  transition: transform 0.25s ease, -webkit-transform 0.25s ease;
+  > nb-card-body[_ngcontent-ymx-c22] {
+    padding: 2rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+}
+
+
