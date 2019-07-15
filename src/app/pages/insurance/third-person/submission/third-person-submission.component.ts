@@ -12,8 +12,8 @@ export class ThirdPersonSubmissionComponent {
   constructor(private myRoutingService: MyRoutingService) {}
 
 
-  onSubmit() {
-    this.myRoutingService.gotoWhereClicked('/pages/insurance/third-person-companies');
+  goToPayment() {
+    this.myRoutingService.gotoWhereClicked('/pages/insurance/third-person-payment');
   }
 
   gotoWhereClicked(adr) {

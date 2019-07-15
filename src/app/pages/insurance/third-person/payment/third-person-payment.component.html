@@ -1,0 +1,127 @@
+<nb-card>
+  <nb-card-header>بیمه شخص ثالث - پرداخت</nb-card-header>
+  <nb-card-body>
+    <nb-stepper #stepper>
+      <nb-step label="انتخاب نوع پرداخت">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <img src="/assets/images/insurance/iran.png" style="width: 60px"/>
+              </div>
+            </div>
+            <div class="col-sm-4" style="padding-top: 10px">
+              <div class="form-group">
+                <h6 class="text-success">حق بیمه 12,770,000 ریال</h6>
+              </div>
+            </div>
+            <div class="col-sm-4" style="margin-top: 10px">
+              <div class="form-group">
+                <nb-select fullWidth [(ngModel)]="paymentType" selected="cash">
+                  <nb-option value="cash">پرداخت نقد</nb-option>
+                  <nb-option value="installment">پرداخت اقساط</nb-option>
+                </nb-select>
+              </div>
+            </div>
+          </div>
+          <button nbButton nbStepperNext>مرحله بعد</button>
+      </nb-step>
+      <nb-step label="پرداخت" *ngIf="paymentType === 'cash'">
+        <form class="step-container">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <img src="/assets/images/insurance/iran.png" style="width: 60px"/>
+              </div>
+            </div>
+            <div class="col-sm-6" style="padding-top: 10px">
+              <div class="form-group">
+                <h6 class="text-success">حق بیمه 12,770,000 ریال</h6>
+              </div>
+            </div>
+          </div>
+          <button style="margin-left: 10px" nbButton nbStepperPrevious>مرحله قبل</button>
+          <button nbButton nbStepperNext>اتصال به درگاه پرداخت بانک</button>
+        </form>
+      </nb-step>
+      <nb-step label="پرداخت اقساط" *ngIf="paymentType === 'installment'">
+        <form class="step-container">
+          <div class="row">
+            <div class="col-sm-6" style="text-align: center">
+              <div class="form-group">
+                <img src="/assets/images/insurance/iran.png" style="width: 60px"/>
+              </div>
+            </div>
+            <div class="col-sm-6" style="text-align: center;padding-top: 20px">
+              <div class="form-group">
+                <h6 class="text-success">حق بیمه 12,770,000 ریال</h6>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="prePayment" class="label">پیش پرداخت</label>
+                <input type="text" nbInput fullWidth id="prePayment" name="prePayment" [(ngModel)]="prePayment">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="numOfChecks" class="label">تعداد چک</label>
+                <input type="text" nbInput fullWidth id="numOfChecks" name="numOfChecks" [(ngModel)]="numOfChecks">
+              </div>
+            </div>
+          </div>
+          <button style="margin-left: 10px" nbButton nbStepperPrevious>مرحله قبل</button>
+          <button nbButton nbStepperNext>مرحله بعد</button>
+        </form>
+      </nb-step>
+      <nb-step label="ارسال تصاویر چک" *ngIf="paymentType === 'installment'">
+        <form class="step-container">
+          <p class="lorem">
+            لطفا تصاویر چک تکمیل شده را در این قسمت ارسال کنید و اصل آنرا تحویل دفاتر نظام مهندسی شهرستان خود کنید.
+          </p>
+          <div class="row">
+            <div class="col-sm-3" style="text-align: center" *ngIf="numOfChecks == 1 || numOfChecks == 2 || numOfChecks == 3 || numOfChecks == 4">
+              <div class="form-group">
+                <input hidden type="file" #uploader1>
+                <br>
+                <button type="button" nbButton [status]="'primary'" outline (click)="uploader1.click()">
+                  تصویر ۱
+                </button>
+              </div>
+            </div>
+            <div class="col-sm-3" style="text-align: center" *ngIf="numOfChecks == 2 || numOfChecks == 3 || numOfChecks == 4">
+              <div class="form-group">
+                <input hidden type="file" #uploader2>
+                <br>
+                <button type="button" nbButton [status]="'primary'" outline (click)="uploader2.click()">
+                  تصویر ۲
+                </button>
+              </div>
+            </div>
+            <div class="col-sm-3" style="text-align: center" *ngIf="numOfChecks == 3 || numOfChecks == 4">
+              <div class="form-group">
+                <input hidden type="file" #uploader3>
+                <br>
+                <button type="button" nbButton [status]="'primary'" outline (click)="uploader3.click()">
+                  تصویر ۳
+                </button>
+              </div>
+            </div>
+            <div class="col-sm-3" style="text-align: center" *ngIf="numOfChecks == 4">
+              <div class="form-group">
+                <input hidden type="file" #uploader4>
+                <br>
+                <button type="button" nbButton [status]="'primary'" outline (click)="uploader4.click()">
+                  تصویر ۴
+                </button>
+              </div>
+            </div>
+          </div>
+          <button style="margin-left: 10px" nbButton nbStepperPrevious>مرحله قبل</button>
+          <button nbButton nbStepperNext>ارسال</button>
+        </form>
+      </nb-step>
+    </nb-stepper>
+  </nb-card-body>
+</nb-card>

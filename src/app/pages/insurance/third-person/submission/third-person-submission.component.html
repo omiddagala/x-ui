@@ -72,7 +72,9 @@
             <label for="frontOfCardImage">تصویر روی کارت ماشین</label>
             <input hidden type="file" #uploader1 id="frontOfCardImage">
             <br>
-            <img src="/assets/images/upload.png" style="width: 100px" (click)="uploader1.click()">
+            <button type="button" nbButton [status]="'primary'" outline (click)="uploader1.click()">
+              انتخاب تصویر
+            </button>
           </div>
         </div>
         <div class="col-sm-3">
@@ -80,7 +82,9 @@
             <label for="backOfCardImage">تصویر پشت کارت ماشین</label>
             <input hidden type="file" #uploader2 id="backOfCardImage">
             <br>
-            <img src="/assets/images/upload.png" style="width: 100px" (click)="uploader2.click()">
+            <button type="button" nbButton [status]="'primary'" outline (click)="uploader2.click()">
+              انتخاب تصویر
+            </button>
           </div>
         </div>
         <div class="col-sm-3">
@@ -88,7 +92,9 @@
             <label for="nationalCardImage">تصویر کارت ملی</label>
             <input hidden type="file" #uploader3 id="nationalCardImage">
             <br>
-            <img src="/assets/images/upload.png" style="width: 100px" (click)="uploader3.click()">
+            <button type="button" nbButton [status]="'primary'" outline (click)="uploader3.click()">
+              انتخاب تصویر
+            </button>
           </div>
         </div>
         <div class="col-sm-3">
@@ -96,12 +102,14 @@
             <label for="insuranceImage">تصویر کامل بیمه نامه</label>
             <input hidden type="file" #uploader4 id="insuranceImage">
             <br>
-            <img src="/assets/images/upload.png" style="width: 100px" (click)="uploader4.click()">
+            <button type="button" nbButton [status]="'primary'" outline (click)="uploader4.click()">
+              انتخاب تصویر
+            </button>
           </div>
         </div>
       </div>
 
-      <button style="margin-top: 50px" type="submit" nbButton>ثبت سفارش و پرداخت</button>
+      <button type="submit" nbButton>ثبت سفارش و پرداخت</button>
     </form>
   </nb-card-body>
 </nb-card>
