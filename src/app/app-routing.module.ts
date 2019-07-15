@@ -8,6 +8,7 @@ import {
   NbRequestPasswordComponent,
   NbResetPasswordComponent,
 } from '@nebular/auth';
+import {NgxLoginComponent} from './pages/auth/login/login-component';
 
 const routes: Routes = [
   {
@@ -16,16 +17,12 @@ const routes: Routes = [
       .then(m => m.PagesModule),
   },
   {
-    path: 'auth',
+    path: '',
     component: NbAuthComponent,
     children: [
       {
-        path: '',
-        component: NbLoginComponent,
-      },
-      {
         path: 'login',
-        component: NbLoginComponent,
+        component: NgxLoginComponent,
       },
       {
         path: 'register',

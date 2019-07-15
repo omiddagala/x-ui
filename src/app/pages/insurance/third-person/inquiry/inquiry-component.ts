@@ -5,8 +5,8 @@ import {NbDialogService} from '@nebular/theme';
 
 @Component({
   selector: 'ngx-ref-insurance-inquiry',
-  styleUrls: ['./inquiry.component.scss'],
-  templateUrl: './inquiry.component.html',
+  styleUrls: ['./inquiry-component.scss'],
+  templateUrl: './inquiry-component.html',
 })
 export class InquiryComponent {
 
