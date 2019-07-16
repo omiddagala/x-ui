@@ -10,6 +10,10 @@ export class NgxLoginComponent extends NbLoginComponent {
 
   user: any;
   myLogin() {
-    this.router.navigate(['/pages/home']);
+    if (this.user.username === 'admin') {
+      this.router.navigate(['/pages/admin']);
+    } else {
+      this.router.navigate(['/pages/home']);
+    }
   }
 }
