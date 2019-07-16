@@ -7,10 +7,15 @@
   justify-content: space-between;
   width: 100%;
 
+  @media (max-width: 800px) {
+    .logo {
+      display: none !important;
+    }
+  }
   .logo-container {
     display: flex;
     align-items: center;
-    width: calc(#{nb-theme(sidebar-width)} - #{nb-theme(header-padding)});
+    width: auto;
   }
 
   nb-action {

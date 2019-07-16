@@ -5,6 +5,7 @@ import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'ngx-header',
@@ -20,40 +21,33 @@ export class HeaderComponent implements OnInit, OnDestroy {
   themes = [
     {
       value: 'default',
-      name: 'Light',
+      name: 'روشن',
     },
     {
       value: 'dark',
-      name: 'Dark',
+      name: 'تاریک',
     },
     {
       value: 'cosmic',
-      name: 'Cosmic',
-    },
-    {
-      value: 'corporate',
-      name: 'Corporate',
+      name: 'کهکشانی',
     },
   ];
 
   currentTheme = 'default';
 
-  userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
+  userMenu = [ { title: 'پروفایل', data: 1 }, { title: 'خروج', data: 2 } ];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private themeService: NbThemeService,
               private userService: UserData,
               private layoutService: LayoutService,
-              private breakpointService: NbMediaBreakpointsService) {
+              private breakpointService: NbMediaBreakpointsService,
+              private router: Router) {
   }
 
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
-
-    this.userService.getUsers()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((users: any) => this.user = users.nick);
 
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
@@ -69,6 +63,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
       )
       .subscribe(themeName => this.currentTheme = themeName);
+    this.menuService.onItemClick().subscribe(( event ) => {
+      this.onItemSelection(event.item.data);
+    });
+  }
+
+  onItemSelection( data ) {
+    if ( data === 1 ) {
+      // alert('1');
+    } else if ( data === 2 ) {
+      this.router.navigate(['/login']);
+    }
   }
 
   ngOnDestroy() {
@@ -87,8 +92,4 @@ export class HeaderComponent implements OnInit, OnDestroy {
     return false;
   }
 
-  navigateHome() {
-    this.menuService.navigateHome();
-    return false;
-  }
 }
