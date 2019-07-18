@@ -1,140 +1,177 @@
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import {AfterViewInit, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
+import {Observable} from 'rxjs';
 
 @Component({
-  selector: 'ngx-echarts-area-stack',
+  selector: 'ngx-admin-report-area',
   template: `
-    <div echarts [options]="options" class="echart"></div>
+    <div echarts [options]="options" class="echart" (chartInit)="onChartInit($event)"></div>
   `,
 })
-export class EchartsAreaStackComponent implements AfterViewInit, OnDestroy {
+export class EchartsAreaStackComponent implements AfterViewInit, OnDestroy, OnInit {
   options: any = {};
   themeSubscription: any;
+  echartsIntance: any;
+  colors;
+  echarts;
 
   constructor(private theme: NbThemeService) {
+  }
+  private eventsSubscription: any;
+  @Input() draw: Observable<void>;
+  randomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+  onChartInit(ec) {
+    this.echartsIntance = ec;
+  }
+
+  ngOnInit() {
+    this.eventsSubscription = this.draw.subscribe((data) => this.drawAgain(data));
+  }
+
+  drawAgain (data) {
+    this.echartsIntance.setOption(this.getOptions());
+  }
+
+  ngOnDestroy() {
+    this.eventsSubscription.unsubscribe();
+    this.themeSubscription.unsubscribe();
+  }
+
+  getOptions () {
+    return {
+      backgroundColor: this.echarts.bg,
+      color: [this.colors.warningLight, this.colors.infoLight,
+        this.colors.dangerLight, this.colors.successLight, this.colors.primaryLight],
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross',
+          label: {
+            backgroundColor: this.echarts.tooltipBackgroundColor,
+          },
+        },
+      },
+      legend: {
+        data: ['بیمه ثالث', 'بیمه عمر', 'بلیط هواپیما', 'بلیط قطار', 'بلیط اتوبوس'],
+        textStyle: {
+          color: this.echarts.textColor,
+        },
+      },
+      grid: {
+        left: '3%',
+        right: '3%',
+        bottom: '3%',
+        containLabel: true,
+      },
+      xAxis: [
+        {
+          type: 'category',
+          boundaryGap: false,
+          data: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر'],
+          axisTick: {
+            alignWithLabel: true,
+          },
+          axisLine: {
+            lineStyle: {
+              color: this.echarts.axisLineColor,
+            },
+          },
+          axisLabel: {
+            textStyle: {
+              color: this.echarts.textColor,
+            },
+          },
+        },
+      ],
+      yAxis: [
+        {
+          type: 'value',
+          name: 'تعداد',
+          axisLine: {
+            lineStyle: {
+              color: this.echarts.axisLineColor,
+            },
+          },
+          splitLine: {
+            lineStyle: {
+              color: this.echarts.splitLineColor,
+            },
+          },
+          axisLabel: {
+            textStyle: {
+              color: this.echarts.textColor,
+            },
+          },
+        },
+      ],
+      series: [
+        {
+          name: 'بیمه ثالث',
+          type: 'line',
+          stack: 'Total amount',
+          areaStyle: { normal: { opacity: this.echarts.areaOpacity } },
+          data: [this.randomNumber(100, 500), this.randomNumber(100, 500), this.randomNumber(100, 500)
+            , this.randomNumber(100, 500), this.randomNumber(100, 500), this.randomNumber(100, 500),
+            this.randomNumber(100, 500)],
+        },
+        {
+          name: 'بیمه عمر',
+          type: 'line',
+          stack: 'Total amount',
+          areaStyle: { normal: { opacity: this.echarts.areaOpacity } },
+          data: [this.randomNumber(100, 500), this.randomNumber(100, 500), this.randomNumber(100, 500)
+            , this.randomNumber(100, 500), this.randomNumber(100, 500), this.randomNumber(100, 500),
+            this.randomNumber(100, 500)],
+        },
+        {
+          name: 'بلیط هواپیما',
+          type: 'line',
+          stack: 'Total amount',
+          areaStyle: { normal: { opacity: this.echarts.areaOpacity } },
+          data: [this.randomNumber(100, 500), this.randomNumber(100, 500), this.randomNumber(100, 500)
+            , this.randomNumber(100, 500), this.randomNumber(100, 500), this.randomNumber(100, 500),
+            this.randomNumber(100, 500)],
+        },
+        {
+          name: 'بلیط قطار',
+          type: 'line',
+          stack: 'Total amount',
+          areaStyle: { normal: { opacity: this.echarts.areaOpacity } },
+          data: [this.randomNumber(100, 500), this.randomNumber(100, 500), this.randomNumber(100, 500)
+            , this.randomNumber(100, 500), this.randomNumber(100, 500), this.randomNumber(100, 500),
+            this.randomNumber(100, 500)],
+        },
+        {
+          name: 'بلیط اتوبوس',
+          type: 'line',
+          stack: 'Total amount',
+          label: {
+            normal: {
+              show: true,
+              position: 'top',
+              textStyle: {
+                color: this.echarts.textColor,
+              },
+            },
+          },
+          areaStyle: { normal: { opacity: this.echarts.areaOpacity } },
+          data: [this.randomNumber(100, 500), this.randomNumber(100, 500), this.randomNumber(100, 500)
+            , this.randomNumber(100, 500), this.randomNumber(100, 500), this.randomNumber(100, 500),
+            this.randomNumber(100, 500)],
+        },
+      ],
+    };
   }
 
   ngAfterViewInit() {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
 
-      const colors: any = config.variables;
-      const echarts: any = config.variables.echarts;
+      this.colors = config.variables;
+      this.echarts = config.variables.echarts;
 
-      this.options = {
-        backgroundColor: echarts.bg,
-        color: [colors.warningLight, colors.infoLight, colors.dangerLight, colors.successLight, colors.primaryLight],
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: {
-            type: 'cross',
-            label: {
-              backgroundColor: echarts.tooltipBackgroundColor,
-            },
-          },
-        },
-        legend: {
-          data: ['Mail marketing', 'Affiliate advertising', 'Video ad', 'Direct interview', 'Search engine'],
-          textStyle: {
-            color: echarts.textColor,
-          },
-        },
-        grid: {
-          left: '3%',
-          right: '4%',
-          bottom: '3%',
-          containLabel: true,
-        },
-        xAxis: [
-          {
-            type: 'category',
-            boundaryGap: false,
-            data: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-            axisTick: {
-              alignWithLabel: true,
-            },
-            axisLine: {
-              lineStyle: {
-                color: echarts.axisLineColor,
-              },
-            },
-            axisLabel: {
-              textStyle: {
-                color: echarts.textColor,
-              },
-            },
-          },
-        ],
-        yAxis: [
-          {
-            type: 'value',
-            axisLine: {
-              lineStyle: {
-                color: echarts.axisLineColor,
-              },
-            },
-            splitLine: {
-              lineStyle: {
-                color: echarts.splitLineColor,
-              },
-            },
-            axisLabel: {
-              textStyle: {
-                color: echarts.textColor,
-              },
-            },
-          },
-        ],
-        series: [
-          {
-            name: 'Mail marketing',
-            type: 'line',
-            stack: 'Total amount',
-            areaStyle: { normal: { opacity: echarts.areaOpacity } },
-            data: [120, 132, 101, 134, 90, 230, 210],
-          },
-          {
-            name: 'Affiliate advertising',
-            type: 'line',
-            stack: 'Total amount',
-            areaStyle: { normal: { opacity: echarts.areaOpacity } },
-            data: [220, 182, 191, 234, 290, 330, 310],
-          },
-          {
-            name: 'Video ad',
-            type: 'line',
-            stack: 'Total amount',
-            areaStyle: { normal: { opacity: echarts.areaOpacity } },
-            data: [150, 232, 201, 154, 190, 330, 410],
-          },
-          {
-            name: 'Direct interview',
-            type: 'line',
-            stack: 'Total amount',
-            areaStyle: { normal: { opacity: echarts.areaOpacity } },
-            data: [320, 332, 301, 334, 390, 330, 320],
-          },
-          {
-            name: 'Search engine',
-            type: 'line',
-            stack: 'Total amount',
-            label: {
-              normal: {
-                show: true,
-                position: 'top',
-                textStyle: {
-                  color: echarts.textColor,
-                },
-              },
-            },
-            areaStyle: { normal: { opacity: echarts.areaOpacity } },
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
-          },
-        ],
-      };
+      this.options = this.getOptions();
     });
-  }
-
-  ngOnDestroy(): void {
-    this.themeSubscription.unsubscribe();
   }
 }
