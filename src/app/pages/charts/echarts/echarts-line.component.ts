@@ -76,6 +76,7 @@ export class EchartsLineComponent implements AfterViewInit, OnDestroy, OnInit {
       yAxis: [
         {
           type: 'log',
+          name: 'تعداد',
           axisLine: {
             lineStyle: {
               color: this.echarts.axisLineColor,

@@ -76,9 +76,26 @@
   </div>
   <div class="col-lg-6">
     <nb-card>
-      <nb-card-header>Multiple x-axis</nb-card-header>
+      <nb-card-header>
+        <div class="row show-grid">
+          <div class="col-6 col-sm-6">
+            <div>
+              <nb-select [(ngModel)]="selectedStateModel" (selectedChange)="selectedStateChanged()">
+                <nb-option *ngFor="let item of states" value="{{item.value}}">{{item.title}}</nb-option>
+              </nb-select>
+            </div>
+          </div>
+          <div class="col-6 col-sm-6">
+            <div>
+              <nb-select [(ngModel)]="selectedCityModel" (selectedChange)="selectedCityChanged()">
+                <nb-option *ngFor="let item of selectedState.cities" value="{{item.value}}">{{item.title}}</nb-option>
+              </nb-select>
+            </div>
+          </div>
+        </div>
+      </nb-card-header>
       <nb-card-body>
-        <ngx-echarts-multiple-xaxis></ngx-echarts-multiple-xaxis>
+        <ngx-echarts-multiple-xaxis [draw]="eventsSubject.asObservable()"></ngx-echarts-multiple-xaxis>
       </nb-card-body>
     </nb-card>
   </div>

@@ -1,166 +1,199 @@
-import { Component, AfterViewInit, OnDestroy } from '@angular/core';
+import {Component, AfterViewInit, OnDestroy, OnInit, Input} from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'ngx-echarts-multiple-xaxis',
   template: `
-    <div echarts [options]="options" class="echart"></div>
+    <div echarts [options]="options" class="echart" (chartInit)="onChartInit($event)"></div>
   `,
 })
-export class EchartsMultipleXaxisComponent implements AfterViewInit, OnDestroy {
+export class EchartsMultipleXaxisComponent implements AfterViewInit, OnDestroy, OnInit {
   options: any = {};
   themeSubscription: any;
+  echartsIntance: any;
+  colors;
+  echarts;
 
   constructor(private theme: NbThemeService) {
+  }
+  private eventsSubscription: any;
+  @Input() draw: Observable<void>;
+  randomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+  onChartInit(ec) {
+    this.echartsIntance = ec;
+  }
+
+  ngOnInit() {
+    this.eventsSubscription = this.draw.subscribe((data) => this.drawAgain(data));
+  }
+
+  drawAgain (data) {
+    this.echartsIntance.setOption(this.getOptions());
+  }
+
+  ngOnDestroy() {
+    this.eventsSubscription.unsubscribe();
+    this.themeSubscription.unsubscribe();
+  }
+
+  getOptions () {
+    return {
+      backgroundColor: this.echarts.bg,
+      color: [this.colors.success, this.colors.info],
+      tooltip: {
+        trigger: 'none',
+        axisPointer: {
+          type: 'cross',
+        },
+      },
+      legend: {
+        data: ['بیمه ثالث', 'بلیط هواپیما'],
+        textStyle: {
+          color: this.echarts.textColor,
+        },
+      },
+      grid: {
+        top: 70,
+        bottom: 50,
+      },
+      xAxis: [
+        {
+          type: 'category',
+          name: 'تعداد',
+          axisTick: {
+            alignWithLabel: true,
+          },
+          axisLine: {
+            onZero: false,
+            lineStyle: {
+              color: this.colors.info,
+            },
+          },
+          axisLabel: {
+            textStyle: {
+              color: this.echarts.textColor,
+            },
+          },
+          axisPointer: {
+            label: {
+              formatter: params => {
+                return (
+                  'تعداد  ' + params.value + (params.seriesData.length ? '：' + params.seriesData[0].data : '')
+                );
+              },
+            },
+          },
+          data: [
+            'فروردین-۹۷',
+            'اردیبهشت-۹۷',
+            'خرداد-۹۷',
+            'تیر-۹۷',
+            'مرداد-۹۷',
+            'شهریور-۹۷',
+            'مهر-۹۷',
+            'آبان-۹۷',
+            'آذر-۹۷',
+            'دی-۹۷',
+            'بهمن-۹۷',
+            'اسفند-۹۷',
+          ],
+        },
+        {
+          type: 'category',
+          axisTick: {
+            alignWithLabel: true,
+          },
+          axisLine: {
+            onZero: false,
+            lineStyle: {
+              color: this.colors.success,
+            },
+          },
+          axisLabel: {
+            textStyle: {
+              color: this.echarts.textColor,
+            },
+          },
+          axisPointer: {
+            label: {
+              formatter: params => {
+                return (
+                  'تعداد  ' + params.value + (params.seriesData.length ? '：' + params.seriesData[0].data : '')
+                );
+              },
+            },
+          },
+          data: [
+            'فروردین-۹۸',
+            'اردیبهشت-۹۸',
+            'خرداد-۹۸',
+            'تیر-۹۸',
+            'مرداد-۹۸',
+            'شهریور-۹۸',
+            'مهر-۹۸',
+            'آبان-۹۸',
+            'آذر-۹۸',
+            'دی-۹۸',
+            'بهمن-۹۸',
+            'اسفند-۹۸',
+          ],
+        },
+      ],
+      yAxis: [
+        {
+          type: 'value',
+          name: 'تعداد',
+          axisLine: {
+            lineStyle: {
+              color: this.echarts.axisLineColor,
+            },
+          },
+          splitLine: {
+            lineStyle: {
+              color: this.echarts.splitLineColor,
+            },
+          },
+          axisLabel: {
+            textStyle: {
+              color: this.echarts.textColor,
+            },
+          },
+        },
+      ],
+      series: [
+        {
+          name: 'بیمه ثالث',
+          type: 'line',
+          xAxisIndex: 1,
+          smooth: true,
+          data: [this.randomNumber(2, 200), this.randomNumber(2, 200), this.randomNumber(2, 200),
+            this.randomNumber(2, 200), this.randomNumber(2, 200), this.randomNumber(2, 200),
+            this.randomNumber(2, 200), this.randomNumber(2, 200), this.randomNumber(2, 200),
+            this.randomNumber(2, 200), this.randomNumber(2, 200), this.randomNumber(2, 200)],
+        },
+        {
+          name: 'بلیط هواپیما',
+          type: 'line',
+          smooth: true,
+          data: [this.randomNumber(2, 200), this.randomNumber(2, 200), this.randomNumber(2, 200),
+            this.randomNumber(2, 200), this.randomNumber(2, 200), this.randomNumber(2, 200),
+            this.randomNumber(2, 200), this.randomNumber(2, 200), this.randomNumber(2, 200),
+            this.randomNumber(2, 200), this.randomNumber(2, 200), this.randomNumber(2, 200)],
+        },
+      ],
+    };
   }
 
   ngAfterViewInit() {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
 
-      const colors: any = config.variables;
-      const echarts: any = config.variables.echarts;
+      this.colors = config.variables;
+      this.echarts = config.variables.echarts;
 
-      this.options = {
-        backgroundColor: echarts.bg,
-        color: [colors.success, colors.info],
-        tooltip: {
-          trigger: 'none',
-          axisPointer: {
-            type: 'cross',
-          },
-        },
-        legend: {
-          data: ['2015 Precipitation', '2016 Precipitation'],
-          textStyle: {
-            color: echarts.textColor,
-          },
-        },
-        grid: {
-          top: 70,
-          bottom: 50,
-        },
-        xAxis: [
-          {
-            type: 'category',
-            axisTick: {
-              alignWithLabel: true,
-            },
-            axisLine: {
-              onZero: false,
-              lineStyle: {
-                color: colors.info,
-              },
-            },
-            axisLabel: {
-              textStyle: {
-                color: echarts.textColor,
-              },
-            },
-            axisPointer: {
-              label: {
-                formatter: params => {
-                  return (
-                    'Precipitation  ' + params.value + (params.seriesData.length ? '：' + params.seriesData[0].data : '')
-                  );
-                },
-              },
-            },
-            data: [
-              '2016-1',
-              '2016-2',
-              '2016-3',
-              '2016-4',
-              '2016-5',
-              '2016-6',
-              '2016-7',
-              '2016-8',
-              '2016-9',
-              '2016-10',
-              '2016-11',
-              '2016-12',
-            ],
-          },
-          {
-            type: 'category',
-            axisTick: {
-              alignWithLabel: true,
-            },
-            axisLine: {
-              onZero: false,
-              lineStyle: {
-                color: colors.success,
-              },
-            },
-            axisLabel: {
-              textStyle: {
-                color: echarts.textColor,
-              },
-            },
-            axisPointer: {
-              label: {
-                formatter: params => {
-                  return (
-                    'Precipitation  ' + params.value + (params.seriesData.length ? '：' + params.seriesData[0].data : '')
-                  );
-                },
-              },
-            },
-            data: [
-              '2015-1',
-              '2015-2',
-              '2015-3',
-              '2015-4',
-              '2015-5',
-              '2015-6',
-              '2015-7',
-              '2015-8',
-              '2015-9',
-              '2015-10',
-              '2015-11',
-              '2015-12',
-            ],
-          },
-        ],
-        yAxis: [
-          {
-            type: 'value',
-            axisLine: {
-              lineStyle: {
-                color: echarts.axisLineColor,
-              },
-            },
-            splitLine: {
-              lineStyle: {
-                color: echarts.splitLineColor,
-              },
-            },
-            axisLabel: {
-              textStyle: {
-                color: echarts.textColor,
-              },
-            },
-          },
-        ],
-        series: [
-          {
-            name: '2015 Precipitation',
-            type: 'line',
-            xAxisIndex: 1,
-            smooth: true,
-            data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
-          },
-          {
-            name: '2016 Precipitation',
-            type: 'line',
-            smooth: true,
-            data: [3.9, 5.9, 11.1, 18.7, 48.3, 69.2, 231.6, 46.6, 55.4, 18.4, 10.3, 0.7],
-          },
-        ],
-      };
+      this.options = this.getOptions();
     });
-  }
-
-  ngOnDestroy(): void {
-    this.themeSubscription.unsubscribe();
   }
 }
