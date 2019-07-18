@@ -1,53 +1,131 @@
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import {AfterViewInit, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'ngx-echarts-pie',
   template: `
-    <div echarts [options]="options" class="echart"></div>
+    <div echarts [options]="options" class="echart" (chartInit)="onChartInit($event)"></div>
   `,
 })
-export class EchartsPieComponent implements AfterViewInit, OnDestroy {
+export class EchartsPieComponent implements AfterViewInit, OnDestroy, OnInit {
   options: any = {};
   themeSubscription: any;
+  echartsIntance: any;
+  colors;
+  echarts;
 
   constructor(private theme: NbThemeService) {
+  }
+  private eventsSubscription: any;
+  @Input() draw: Observable<void>;
+  private chartData = this.generateData();
+  randomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+  generateData() {
+    return [
+      { value: this.randomNumber(100, 999), name: 'بیمه عمر' },
+      { value: this.randomNumber(100, 999), name: 'بلیط هواپیما' },
+      { value: this.randomNumber(100, 999), name: 'بلیط قطار' },
+      { value: this.randomNumber(100, 999), name: 'بلیط اتوبوس' },
+      { value: this.randomNumber(100, 999), name: 'بیمه ثالث' },
+    ];
+  }
+
+  onChartInit(ec) {
+    this.echartsIntance = ec;
+  }
+
+  ngOnInit() {
+    this.eventsSubscription = this.draw.subscribe((data) => this.drawAgain(data));
+  }
+
+  drawAgain (data) {
+    this.options.series.data = this.generateData();
+    this.echartsIntance.setOption({
+      backgroundColor: echarts.bg,
+      color: [this.colors.warningLight, this.colors.infoLight,
+        this.colors.dangerLight, this.colors.successLight, this.colors.primaryLight],
+      tooltip: {
+        trigger: 'item',
+        formatter: '{a} <br/>{b} : {c} ({d}%)',
+      },
+      legend: {
+        orient: 'horizontal',
+        left: 'left',
+        data: ['بیمه ثالث', 'بیمه عمر', 'بلیط هواپیما', 'بلیط قطار', 'بلیط اتوبوس'],
+        textStyle: {
+          color: echarts.textColor,
+        },
+      },
+      series: [
+        {
+          name: 'محصول',
+          type: 'pie',
+          radius: '80%',
+          center: ['50%', '50%'],
+          data: this.generateData(),
+          itemStyle: {
+            emphasis: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: echarts.itemHoverShadowColor,
+            },
+          },
+          label: {
+            normal: {
+              textStyle: {
+                color: echarts.textColor,
+              },
+            },
+          },
+          labelLine: {
+            normal: {
+              lineStyle: {
+                color: echarts.axisLineColor,
+              },
+            },
+          },
+        },
+      ],
+    });
+  }
+
+  ngOnDestroy() {
+    this.eventsSubscription.unsubscribe();
+    this.themeSubscription.unsubscribe();
   }
 
   ngAfterViewInit() {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
 
-      const colors = config.variables;
-      const echarts: any = config.variables.echarts;
+      this.colors = config.variables;
+      this.echarts = config.variables.echarts;
 
       this.options = {
         backgroundColor: echarts.bg,
-        color: [colors.warningLight, colors.infoLight, colors.dangerLight, colors.successLight, colors.primaryLight],
+        color: [this.colors.warningLight, this.colors.infoLight,
+          this.colors.dangerLight, this.colors.successLight, this.colors.primaryLight],
         tooltip: {
           trigger: 'item',
           formatter: '{a} <br/>{b} : {c} ({d}%)',
         },
         legend: {
-          orient: 'vertical',
+          orient: 'horizontal',
           left: 'left',
-          data: ['USA', 'Germany', 'France', 'Canada', 'Russia'],
+          data: ['بیمه ثالث', 'بیمه عمر', 'بلیط هواپیما', 'بلیط قطار', 'بلیط اتوبوس'],
           textStyle: {
             color: echarts.textColor,
           },
         },
         series: [
           {
-            name: 'Countries',
+            name: 'محصول',
             type: 'pie',
             radius: '80%',
             center: ['50%', '50%'],
-            data: [
-              { value: 335, name: 'Germany' },
-              { value: 310, name: 'France' },
-              { value: 234, name: 'Canada' },
-              { value: 135, name: 'Russia' },
-              { value: 1548, name: 'USA' },
-            ],
+            data: this.chartData,
             itemStyle: {
               emphasis: {
                 shadowBlur: 10,
@@ -73,9 +151,5 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy {
         ],
       };
     });
-  }
-
-  ngOnDestroy(): void {
-    this.themeSubscription.unsubscribe();
   }
 }

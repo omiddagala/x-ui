@@ -63,7 +63,10 @@ const components = [
     ChartjsPieComponent,
     ChartjsBarComponent,
     ChartjsMultipleXaxisComponent,
-    EchartsBarAnimationComponent
-  ]
+    EchartsBarAnimationComponent,
+    EchartsLineComponent,
+    EchartsAreaStackComponent,
+    EchartsRadarComponent,
+  ],
 })
 export class ChartsModule {}

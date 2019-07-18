@@ -12,6 +12,8 @@ import {EchartsMultipleXaxisComponent} from './reports/echarts-multiple-xaxis.co
 import {EchartsPieComponent} from './reports/echarts-pie.component';
 import {NgxEchartsModule} from 'ngx-echarts';
 import {EchartsBarComponent} from './reports/echarts-bar.component';
+import {FormsModule} from '@angular/forms';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
   imports: [
@@ -22,6 +24,8 @@ import {EchartsBarComponent} from './reports/echarts-bar.component';
     ChartModule,
     NgxEchartsModule,
     NbSelectModule,
+    FormsModule,
+    CommonModule,
   ],
   declarations: [
     AdminProductListComponent,
