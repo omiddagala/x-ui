@@ -32,18 +32,8 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy, OnInit {
       { value: this.randomNumber(100, 999), name: 'بیمه ثالث' },
     ];
   }
-
-  onChartInit(ec) {
-    this.echartsIntance = ec;
-  }
-
-  ngOnInit() {
-    this.eventsSubscription = this.draw.subscribe((data) => this.drawAgain(data));
-  }
-
-  drawAgain (data) {
-    this.options.series.data = this.generateData();
-    this.echartsIntance.setOption({
+  getOptions () {
+    return {
       backgroundColor: echarts.bg,
       color: [this.colors.warningLight, this.colors.infoLight,
         this.colors.dangerLight, this.colors.successLight, this.colors.primaryLight],
@@ -53,10 +43,10 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy, OnInit {
       },
       legend: {
         orient: 'horizontal',
-        left: 'left',
+        left: 'right',
         data: ['بیمه ثالث', 'بیمه عمر', 'بلیط هواپیما', 'بلیط قطار', 'بلیط اتوبوس'],
         textStyle: {
-          color: echarts.textColor,
+          color: '#1a2138',
         },
       },
       series: [
@@ -89,7 +79,19 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy, OnInit {
           },
         },
       ],
-    });
+    };
+  }
+
+  onChartInit(ec) {
+    this.echartsIntance = ec;
+  }
+
+  ngOnInit() {
+    this.eventsSubscription = this.draw.subscribe((data) => this.drawAgain(data));
+  }
+
+  drawAgain (data) {
+    this.echartsIntance.setOption(this.getOptions());
   }
 
   ngOnDestroy() {
@@ -103,53 +105,7 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy, OnInit {
       this.colors = config.variables;
       this.echarts = config.variables.echarts;
 
-      this.options = {
-        backgroundColor: echarts.bg,
-        color: [this.colors.warningLight, this.colors.infoLight,
-          this.colors.dangerLight, this.colors.successLight, this.colors.primaryLight],
-        tooltip: {
-          trigger: 'item',
-          formatter: '{a} <br/>{b} : {c} ({d}%)',
-        },
-        legend: {
-          orient: 'horizontal',
-          left: 'left',
-          data: ['بیمه ثالث', 'بیمه عمر', 'بلیط هواپیما', 'بلیط قطار', 'بلیط اتوبوس'],
-          textStyle: {
-            color: echarts.textColor,
-          },
-        },
-        series: [
-          {
-            name: 'محصول',
-            type: 'pie',
-            radius: '80%',
-            center: ['50%', '50%'],
-            data: this.chartData,
-            itemStyle: {
-              emphasis: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: echarts.itemHoverShadowColor,
-              },
-            },
-            label: {
-              normal: {
-                textStyle: {
-                  color: echarts.textColor,
-                },
-              },
-            },
-            labelLine: {
-              normal: {
-                lineStyle: {
-                  color: echarts.axisLineColor,
-                },
-              },
-            },
-          },
-        ],
-      };
+      this.options = this.getOptions();
     });
   }
 }
