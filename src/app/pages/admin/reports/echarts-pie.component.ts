@@ -19,7 +19,6 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy, OnInit {
   }
   private eventsSubscription: any;
   @Input() draw: Observable<void>;
-  private chartData = this.generateData();
   randomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
@@ -46,7 +45,7 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy, OnInit {
         left: 'right',
         data: ['بیمه ثالث', 'بیمه عمر', 'بلیط هواپیما', 'بلیط قطار', 'بلیط اتوبوس'],
         textStyle: {
-          color: '#1a2138',
+          color: this.echarts.textColor,
         },
       },
       series: [
@@ -60,20 +59,20 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy, OnInit {
             emphasis: {
               shadowBlur: 10,
               shadowOffsetX: 0,
-              shadowColor: echarts.itemHoverShadowColor,
+              shadowColor: this.echarts.itemHoverShadowColor,
             },
           },
           label: {
             normal: {
               textStyle: {
-                color: echarts.textColor,
+                color: this.echarts.textColor,
               },
             },
           },
           labelLine: {
             normal: {
               lineStyle: {
-                color: echarts.axisLineColor,
+                color: this.echarts.axisLineColor,
               },
             },
           },
