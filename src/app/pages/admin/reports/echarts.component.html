@@ -126,9 +126,26 @@
   </div>
   <div class="col-lg-6">
     <nb-card>
-      <nb-card-header>Bar Animation</nb-card-header>
+      <nb-card-header>
+        <div class="row show-grid">
+          <div class="col-6 col-sm-6">
+            <div>
+              <nb-select [(ngModel)]="selectedStateModel" (selectedChange)="selectedStateChanged()">
+                <nb-option *ngFor="let item of states" value="{{item.value}}">{{item.title}}</nb-option>
+              </nb-select>
+            </div>
+          </div>
+          <div class="col-6 col-sm-6">
+            <div>
+              <nb-select [(ngModel)]="selectedCityModel" (selectedChange)="selectedCityChanged()">
+                <nb-option *ngFor="let item of selectedState.cities" value="{{item.value}}">{{item.title}}</nb-option>
+              </nb-select>
+            </div>
+          </div>
+        </div>
+      </nb-card-header>
       <nb-card-body>
-        <ngx-echarts-bar-animation></ngx-echarts-bar-animation>
+        <ngx-admin-reports-bar-animation [draw]="eventsSubject.asObservable()"></ngx-admin-reports-bar-animation>
       </nb-card-body>
     </nb-card>
   </div>

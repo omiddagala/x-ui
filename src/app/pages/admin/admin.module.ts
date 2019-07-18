@@ -15,6 +15,7 @@ import {EchartsBarComponent} from './reports/echarts-bar.component';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {EchartsAreaStackComponent} from './reports/echarts-area-stack.component';
+import {EchartsBarAnimationComponent} from './reports/echarts-bar-animation.component';
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import {EchartsAreaStackComponent} from './reports/echarts-area-stack.component'
     EchartsMultipleXaxisComponent,
     EchartsPieComponent,
     EchartsAreaStackComponent,
+    EchartsBarAnimationComponent,
   ],
   providers: [
     MyRoutingService,
