@@ -21,7 +21,7 @@ export class EchartsComponent {
   private eventsSubject: Subject<any> = new Subject<any>();
 
 
-  selectedStateChanged () {
+  selectedStateChanged (emitter) {
     for (let i = 0 ; i < this.states.length ; i++) {
       if (this.states[i].value === this.selectedStateModel) {
         this.selectedState = this.states[i];
@@ -29,9 +29,9 @@ export class EchartsComponent {
         break;
       }
     }
-    this.eventsSubject.next({ state: this.selectedStateModel, city: this.selectedCityModel });
+    this.eventsSubject.next({ state: this.selectedStateModel, city: this.selectedCityModel, emitter: emitter });
   }
-  selectedCityChanged () {
-    this.eventsSubject.next({ state: this.selectedStateModel, city: this.selectedCityModel });
+  selectedCityChanged (emitter) {
+    this.eventsSubject.next({ state: this.selectedStateModel, city: this.selectedCityModel, emitter: emitter });
   }
 }

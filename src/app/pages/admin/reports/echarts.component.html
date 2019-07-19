@@ -5,14 +5,14 @@
         <div class="row show-grid">
           <div class="col-6 col-sm-6">
             <div>
-              <nb-select [(ngModel)]="selectedStateModel" (selectedChange)="selectedStateChanged()">
+              <nb-select [(ngModel)]="selectedStateModel" (selectedChange)="selectedStateChanged('pie')">
                 <nb-option *ngFor="let item of states" value="{{item.value}}">{{item.title}}</nb-option>
               </nb-select>
             </div>
           </div>
           <div class="col-6 col-sm-6">
             <div>
-              <nb-select [(ngModel)]="selectedCityModel" (selectedChange)="selectedCityChanged()">
+              <nb-select [(ngModel)]="selectedCityModel" (selectedChange)="selectedCityChanged('pie')">
                 <nb-option *ngFor="let item of selectedState.cities" value="{{item.value}}">{{item.title}}</nb-option>
               </nb-select>
             </div>
@@ -30,14 +30,14 @@
         <div class="row show-grid">
           <div class="col-6 col-sm-6">
             <div>
-              <nb-select [(ngModel)]="selectedStateModel" (selectedChange)="selectedStateChanged()">
+              <nb-select [(ngModel)]="selectedStateModel" (selectedChange)="selectedStateChanged('bar')">
                 <nb-option *ngFor="let item of states" value="{{item.value}}">{{item.title}}</nb-option>
               </nb-select>
             </div>
           </div>
           <div class="col-6 col-sm-6">
             <div>
-              <nb-select [(ngModel)]="selectedCityModel" (selectedChange)="selectedCityChanged()">
+              <nb-select [(ngModel)]="selectedCityModel" (selectedChange)="selectedCityChanged('bar')">
                 <nb-option *ngFor="let item of selectedState.cities" value="{{item.value}}">{{item.title}}</nb-option>
               </nb-select>
             </div>
@@ -55,14 +55,14 @@
         <div class="row show-grid">
           <div class="col-6 col-sm-6">
             <div>
-              <nb-select [(ngModel)]="selectedStateModel" (selectedChange)="selectedStateChanged()">
+              <nb-select [(ngModel)]="selectedStateModel" (selectedChange)="selectedStateChanged('line')">
                 <nb-option *ngFor="let item of states" value="{{item.value}}">{{item.title}}</nb-option>
               </nb-select>
             </div>
           </div>
           <div class="col-6 col-sm-6">
             <div>
-              <nb-select [(ngModel)]="selectedCityModel" (selectedChange)="selectedCityChanged()">
+              <nb-select [(ngModel)]="selectedCityModel" (selectedChange)="selectedCityChanged('line')">
                 <nb-option *ngFor="let item of selectedState.cities" value="{{item.value}}">{{item.title}}</nb-option>
               </nb-select>
             </div>
@@ -70,7 +70,7 @@
         </div>
       </nb-card-header>
       <nb-card-body>
-        <ngx-echarts-line [draw]="eventsSubject.asObservable()"></ngx-echarts-line>
+        <ngx-admin-reports-line [draw]="eventsSubject.asObservable()"></ngx-admin-reports-line>
       </nb-card-body>
     </nb-card>
   </div>
@@ -80,14 +80,14 @@
         <div class="row show-grid">
           <div class="col-6 col-sm-6">
             <div>
-              <nb-select [(ngModel)]="selectedStateModel" (selectedChange)="selectedStateChanged()">
+              <nb-select [(ngModel)]="selectedStateModel" (selectedChange)="selectedStateChanged('multi')">
                 <nb-option *ngFor="let item of states" value="{{item.value}}">{{item.title}}</nb-option>
               </nb-select>
             </div>
           </div>
           <div class="col-6 col-sm-6">
             <div>
-              <nb-select [(ngModel)]="selectedCityModel" (selectedChange)="selectedCityChanged()">
+              <nb-select [(ngModel)]="selectedCityModel" (selectedChange)="selectedCityChanged('multi')">
                 <nb-option *ngFor="let item of selectedState.cities" value="{{item.value}}">{{item.title}}</nb-option>
               </nb-select>
             </div>
@@ -105,14 +105,14 @@
         <div class="row show-grid">
           <div class="col-6 col-sm-6">
             <div>
-              <nb-select [(ngModel)]="selectedStateModel" (selectedChange)="selectedStateChanged()">
+              <nb-select [(ngModel)]="selectedStateModel" (selectedChange)="selectedStateChanged('area')">
                 <nb-option *ngFor="let item of states" value="{{item.value}}">{{item.title}}</nb-option>
               </nb-select>
             </div>
           </div>
           <div class="col-6 col-sm-6">
             <div>
-              <nb-select [(ngModel)]="selectedCityModel" (selectedChange)="selectedCityChanged()">
+              <nb-select [(ngModel)]="selectedCityModel" (selectedChange)="selectedCityChanged('area')">
                 <nb-option *ngFor="let item of selectedState.cities" value="{{item.value}}">{{item.title}}</nb-option>
               </nb-select>
             </div>
@@ -130,14 +130,14 @@
         <div class="row show-grid">
           <div class="col-6 col-sm-6">
             <div>
-              <nb-select [(ngModel)]="selectedStateModel" (selectedChange)="selectedStateChanged()">
+              <nb-select [(ngModel)]="selectedStateModel" (selectedChange)="selectedStateChanged('anim')">
                 <nb-option *ngFor="let item of states" value="{{item.value}}">{{item.title}}</nb-option>
               </nb-select>
             </div>
           </div>
           <div class="col-6 col-sm-6">
             <div>
-              <nb-select [(ngModel)]="selectedCityModel" (selectedChange)="selectedCityChanged()">
+              <nb-select [(ngModel)]="selectedCityModel" (selectedChange)="selectedCityChanged('anim')">
                 <nb-option *ngFor="let item of selectedState.cities" value="{{item.value}}">{{item.title}}</nb-option>
               </nb-select>
             </div>
@@ -155,14 +155,14 @@
         <div class="row show-grid">
           <div class="col-6 col-sm-6">
             <div>
-              <nb-select [(ngModel)]="selectedStateModel" (selectedChange)="selectedStateChanged()">
+              <nb-select [(ngModel)]="selectedStateModel" (selectedChange)="selectedStateChanged('radar')">
                 <nb-option *ngFor="let item of states" value="{{item.value}}">{{item.title}}</nb-option>
               </nb-select>
             </div>
           </div>
           <div class="col-6 col-sm-6">
             <div>
-              <nb-select [(ngModel)]="selectedCityModel" (selectedChange)="selectedCityChanged()">
+              <nb-select [(ngModel)]="selectedCityModel" (selectedChange)="selectedCityChanged('radar')">
                 <nb-option *ngFor="let item of selectedState.cities" value="{{item.value}}">{{item.title}}</nb-option>
               </nb-select>
             </div>

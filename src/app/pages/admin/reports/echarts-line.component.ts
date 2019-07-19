@@ -1,106 +1,143 @@
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import {AfterViewInit, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
+import {Observable} from 'rxjs';
 
 @Component({
-  selector: 'ngx-echarts-line',
+  selector: 'ngx-admin-reports-line',
   template: `
-    <div echarts [options]="options" class="echart"></div>
+    <div echarts [options]="options" class="echart" (chartInit)="onChartInit($event)"></div>
   `,
 })
-export class EchartsLineComponent implements AfterViewInit, OnDestroy {
+export class EchartsLineComponent implements AfterViewInit, OnDestroy, OnInit {
   options: any = {};
   themeSubscription: any;
+  echartsIntance: any;
+  colors;
+  echarts;
 
   constructor(private theme: NbThemeService) {
+  }
+  private eventsSubscription: any;
+  @Input() draw: Observable<void>;
+  randomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+  onChartInit(ec) {
+    this.echartsIntance = ec;
+  }
+
+  ngOnInit() {
+    this.eventsSubscription = this.draw.subscribe((data) => {
+      // @ts-ignore
+      if (data.emitter !== 'line')
+        return;
+      this.drawAgain(data);
+    });
+  }
+
+  drawAgain (data) {
+    this.echartsIntance.setOption(this.getOptions());
+  }
+
+  ngOnDestroy() {
+    this.eventsSubscription.unsubscribe();
+    this.themeSubscription.unsubscribe();
+  }
+
+  getOptions () {
+    return {
+      backgroundColor: this.echarts.bg,
+      color: [this.colors.danger, this.colors.primary, this.colors.info],
+      tooltip: {
+        trigger: 'item',
+        formatter: '{a} <br/>{b} : {c}',
+      },
+      legend: {
+        left: 'right',
+        data: ['بیمه ثالث', 'بیمه عمر', 'بلیط هواپیما'],
+        textStyle: {
+          color: this.echarts.textColor,
+        },
+      },
+      xAxis: [
+        {
+          type: 'category',
+          data: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر'],
+          axisTick: {
+            alignWithLabel: true,
+          },
+          axisLine: {
+            lineStyle: {
+              color: this.echarts.axisLineColor,
+            },
+          },
+          axisLabel: {
+            textStyle: {
+              color: this.echarts.textColor,
+            },
+          },
+        },
+      ],
+      yAxis: [
+        {
+          type: 'log',
+          name: 'تعداد',
+          axisLine: {
+            lineStyle: {
+              color: this.echarts.axisLineColor,
+            },
+          },
+          splitLine: {
+            lineStyle: {
+              color: this.echarts.splitLineColor,
+            },
+          },
+          axisLabel: {
+            textStyle: {
+              color: this.echarts.textColor,
+            },
+          },
+        },
+      ],
+      grid: {
+        left: '3%',
+        right: '3%',
+        bottom: '3%',
+        containLabel: true,
+      },
+      series: [
+        {
+          name: 'بیمه ثالث',
+          type: 'line',
+          data: [this.randomNumber(10, 500), this.randomNumber(10, 500), this.randomNumber(10, 500),
+            this.randomNumber(10, 500), this.randomNumber(10, 500), this.randomNumber(10, 500),
+            this.randomNumber(10, 500), this.randomNumber(10, 500), this.randomNumber(10, 500)],
+        },
+        {
+          name: 'بیمه عمر',
+          type: 'line',
+          data: [this.randomNumber(10, 500), this.randomNumber(10, 500), this.randomNumber(10, 500),
+            this.randomNumber(10, 500), this.randomNumber(10, 500), this.randomNumber(10, 500),
+            this.randomNumber(10, 500), this.randomNumber(10, 500), this.randomNumber(10, 500)],
+        },
+        {
+          name: 'بلیط هواپیما',
+          type: 'line',
+          data: [this.randomNumber(10, 500), this.randomNumber(10, 500), this.randomNumber(10, 500),
+            this.randomNumber(10, 500), this.randomNumber(10, 500), this.randomNumber(10, 500),
+            this.randomNumber(10, 500), this.randomNumber(10, 500), this.randomNumber(10, 500)],
+        },
+      ],
+    };
   }
 
   ngAfterViewInit() {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
 
-      const colors: any = config.variables;
-      const echarts: any = config.variables.echarts;
+      this.colors = config.variables;
+      this.echarts = config.variables.echarts;
 
-      this.options = {
-        backgroundColor: echarts.bg,
-        color: [colors.danger, colors.primary, colors.info],
-        tooltip: {
-          trigger: 'item',
-          formatter: '{a} <br/>{b} : {c}',
-        },
-        legend: {
-          left: 'left',
-          data: ['Line 1', 'Line 2', 'Line 3'],
-          textStyle: {
-            color: echarts.textColor,
-          },
-        },
-        xAxis: [
-          {
-            type: 'category',
-            data: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
-            axisTick: {
-              alignWithLabel: true,
-            },
-            axisLine: {
-              lineStyle: {
-                color: echarts.axisLineColor,
-              },
-            },
-            axisLabel: {
-              textStyle: {
-                color: echarts.textColor,
-              },
-            },
-          },
-        ],
-        yAxis: [
-          {
-            type: 'log',
-            axisLine: {
-              lineStyle: {
-                color: echarts.axisLineColor,
-              },
-            },
-            splitLine: {
-              lineStyle: {
-                color: echarts.splitLineColor,
-              },
-            },
-            axisLabel: {
-              textStyle: {
-                color: echarts.textColor,
-              },
-            },
-          },
-        ],
-        grid: {
-          left: '3%',
-          right: '4%',
-          bottom: '3%',
-          containLabel: true,
-        },
-        series: [
-          {
-            name: 'Line 1',
-            type: 'line',
-            data: [1, 3, 9, 27, 81, 247, 741, 2223, 6669],
-          },
-          {
-            name: 'Line 2',
-            type: 'line',
-            data: [1, 2, 4, 8, 16, 32, 64, 128, 256],
-          },
-          {
-            name: 'Line 3',
-            type: 'line',
-            data: [1 / 2, 1 / 4, 1 / 8, 1 / 16, 1 / 32, 1 / 64, 1 / 128, 1 / 256, 1 / 512],
-          },
-        ],
-      };
+      this.options = this.getOptions();
     });
-  }
-
-  ngOnDestroy(): void {
-    this.themeSubscription.unsubscribe();
   }
 }

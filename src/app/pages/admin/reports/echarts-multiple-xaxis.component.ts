@@ -27,7 +27,12 @@ export class EchartsMultipleXaxisComponent implements AfterViewInit, OnDestroy, 
   }
 
   ngOnInit() {
-    this.eventsSubscription = this.draw.subscribe((data) => this.drawAgain(data));
+    this.eventsSubscription = this.draw.subscribe((data) => {
+      // @ts-ignore
+      if (data.emitter !== 'multi')
+        return;
+      this.drawAgain(data);
+    });
   }
 
   drawAgain (data) {

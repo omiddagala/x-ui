@@ -17,6 +17,7 @@ import {CommonModule} from '@angular/common';
 import {EchartsAreaStackComponent} from './reports/echarts-area-stack.component';
 import {EchartsBarAnimationComponent} from './reports/echarts-bar-animation.component';
 import {EchartsRadarComponent} from './reports/echarts-radar.component';
+import {EchartsLineComponent} from './reports/echarts-line.component';
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import {EchartsRadarComponent} from './reports/echarts-radar.component';
     EchartsAreaStackComponent,
     EchartsBarAnimationComponent,
     EchartsRadarComponent,
+    EchartsLineComponent,
   ],
   providers: [
     MyRoutingService,

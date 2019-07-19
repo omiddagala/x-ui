@@ -30,7 +30,12 @@ export class EchartsBarAnimationComponent implements AfterViewInit, OnDestroy, O
   }
 
   ngOnInit() {
-    this.eventsSubscription = this.draw.subscribe((data) => this.drawAgain(data));
+    this.eventsSubscription = this.draw.subscribe((data) => {
+      // @ts-ignore
+      if (data.emitter !== 'anim')
+        return;
+      this.drawAgain(data);
+    });
   }
 
   drawAgain (data) {
