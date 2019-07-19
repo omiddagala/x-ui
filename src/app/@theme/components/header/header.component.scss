@@ -24,6 +24,11 @@
     align-content: center;
   }
 
+  ::ng-deep nb-action > nb-badge {
+    left: 8px !important;
+    top: -8px !important;
+  }
+
   nb-user {
     cursor: pointer;
   }
