@@ -5,6 +5,8 @@
  */
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import {Location} from '@angular/common';
+
 
 @Component({
   selector: 'ngx-app',
@@ -12,13 +14,13 @@ import {Router} from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private router: Router) {
+  constructor(private location: Location, private router: Router) {
   }
 
   ngOnInit(): void {
-    // if (this.router.url === '/' || this.router.url === '') {
-    //   this.router.navigate(['/pages/home']);
-    // }
+    if (this.location.path() === '/' || this.location.path() === '') {
+      this.router.navigate(['/login']);
+    }
     // this.router.navigate(['/login']);
   }
 }
