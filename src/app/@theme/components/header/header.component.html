@@ -13,8 +13,9 @@
 <div class="header-container">
   <nb-actions size="small">
 
-    <nb-action class="control-item" icon="email-outline"></nb-action>
-    <nb-action class="control-item" icon="bell-outline"></nb-action>
+    <nb-action badgeStatus="success" badgePosition="top end" badgeText="8" class="control-item" icon="email-outline">
+    </nb-action>
+    <nb-action badgeStatus="danger" badgePosition="top end" badgeText="5" class="control-item" icon="bell-outline"></nb-action>
     <nb-action class="user-action" *nbIsGranted="['view', 'user']" >
       <nb-user [nbContextMenu]="userMenu"
                [onlyPicture]="userPictureOnly"

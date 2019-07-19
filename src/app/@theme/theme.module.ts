@@ -11,7 +11,7 @@ import {
   NbButtonModule,
   NbSelectModule,
   NbIconModule,
-  NbThemeModule, DEFAULT_MEDIA_BREAKPOINTS, NbLayoutDirection,
+  NbThemeModule, DEFAULT_MEDIA_BREAKPOINTS, NbLayoutDirection, NbBadgeModule,
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbSecurityModule } from '@nebular/security';
@@ -53,6 +53,7 @@ const NB_MODULES = [
   NbSelectModule,
   NbIconModule,
   NbEvaIconsModule,
+  NbBadgeModule,
 ];
 const COMPONENTS = [
   HeaderComponent,
