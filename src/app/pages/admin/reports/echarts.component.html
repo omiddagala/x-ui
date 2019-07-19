@@ -3,14 +3,14 @@
     <nb-card>
       <nb-card-header>
         <div class="row show-grid">
-          <div class="col-6 col-sm-6">
+          <div class="col-6 col-sm-6" style="text-align: center">
             <div>
               <nb-select [(ngModel)]="selectedStateModel" (selectedChange)="selectedStateChanged('pie')">
                 <nb-option *ngFor="let item of states" value="{{item.value}}">{{item.title}}</nb-option>
               </nb-select>
             </div>
           </div>
-          <div class="col-6 col-sm-6">
+          <div class="col-6 col-sm-6" style="text-align: center">
             <div>
               <nb-select [(ngModel)]="selectedCityModel" (selectedChange)="selectedCityChanged('pie')">
                 <nb-option *ngFor="let item of selectedState.cities" value="{{item.value}}">{{item.title}}</nb-option>
@@ -28,14 +28,14 @@
     <nb-card>
       <nb-card-header>
         <div class="row show-grid">
-          <div class="col-6 col-sm-6">
+          <div class="col-6 col-sm-6" style="text-align: center">
             <div>
               <nb-select [(ngModel)]="selectedStateModel" (selectedChange)="selectedStateChanged('bar')">
                 <nb-option *ngFor="let item of states" value="{{item.value}}">{{item.title}}</nb-option>
               </nb-select>
             </div>
           </div>
-          <div class="col-6 col-sm-6">
+          <div class="col-6 col-sm-6" style="text-align: center">
             <div>
               <nb-select [(ngModel)]="selectedCityModel" (selectedChange)="selectedCityChanged('bar')">
                 <nb-option *ngFor="let item of selectedState.cities" value="{{item.value}}">{{item.title}}</nb-option>
@@ -53,14 +53,14 @@
     <nb-card>
       <nb-card-header>
         <div class="row show-grid">
-          <div class="col-6 col-sm-6">
+          <div class="col-6 col-sm-6" style="text-align: center">
             <div>
               <nb-select [(ngModel)]="selectedStateModel" (selectedChange)="selectedStateChanged('line')">
                 <nb-option *ngFor="let item of states" value="{{item.value}}">{{item.title}}</nb-option>
               </nb-select>
             </div>
           </div>
-          <div class="col-6 col-sm-6">
+          <div class="col-6 col-sm-6" style="text-align: center">
             <div>
               <nb-select [(ngModel)]="selectedCityModel" (selectedChange)="selectedCityChanged('line')">
                 <nb-option *ngFor="let item of selectedState.cities" value="{{item.value}}">{{item.title}}</nb-option>
@@ -78,14 +78,14 @@
     <nb-card>
       <nb-card-header>
         <div class="row show-grid">
-          <div class="col-6 col-sm-6">
+          <div class="col-6 col-sm-6" style="text-align: center">
             <div>
               <nb-select [(ngModel)]="selectedStateModel" (selectedChange)="selectedStateChanged('multi')">
                 <nb-option *ngFor="let item of states" value="{{item.value}}">{{item.title}}</nb-option>
               </nb-select>
             </div>
           </div>
-          <div class="col-6 col-sm-6">
+          <div class="col-6 col-sm-6" style="text-align: center">
             <div>
               <nb-select [(ngModel)]="selectedCityModel" (selectedChange)="selectedCityChanged('multi')">
                 <nb-option *ngFor="let item of selectedState.cities" value="{{item.value}}">{{item.title}}</nb-option>
@@ -103,14 +103,14 @@
     <nb-card>
       <nb-card-header>
         <div class="row show-grid">
-          <div class="col-6 col-sm-6">
+          <div class="col-6 col-sm-6" style="text-align: center">
             <div>
               <nb-select [(ngModel)]="selectedStateModel" (selectedChange)="selectedStateChanged('area')">
                 <nb-option *ngFor="let item of states" value="{{item.value}}">{{item.title}}</nb-option>
               </nb-select>
             </div>
           </div>
-          <div class="col-6 col-sm-6">
+          <div class="col-6 col-sm-6" style="text-align: center">
             <div>
               <nb-select [(ngModel)]="selectedCityModel" (selectedChange)="selectedCityChanged('area')">
                 <nb-option *ngFor="let item of selectedState.cities" value="{{item.value}}">{{item.title}}</nb-option>
@@ -128,14 +128,14 @@
     <nb-card>
       <nb-card-header>
         <div class="row show-grid">
-          <div class="col-6 col-sm-6">
+          <div class="col-6 col-sm-6" style="text-align: center">
             <div>
               <nb-select [(ngModel)]="selectedStateModel" (selectedChange)="selectedStateChanged('anim')">
                 <nb-option *ngFor="let item of states" value="{{item.value}}">{{item.title}}</nb-option>
               </nb-select>
             </div>
           </div>
-          <div class="col-6 col-sm-6">
+          <div class="col-6 col-sm-6" style="text-align: center">
             <div>
               <nb-select [(ngModel)]="selectedCityModel" (selectedChange)="selectedCityChanged('anim')">
                 <nb-option *ngFor="let item of selectedState.cities" value="{{item.value}}">{{item.title}}</nb-option>
@@ -153,14 +153,14 @@
     <nb-card>
       <nb-card-header>
         <div class="row show-grid">
-          <div class="col-6 col-sm-6">
+          <div class="col-6 col-sm-6" style="text-align: center">
             <div>
               <nb-select [(ngModel)]="selectedStateModel" (selectedChange)="selectedStateChanged('radar')">
                 <nb-option *ngFor="let item of states" value="{{item.value}}">{{item.title}}</nb-option>
               </nb-select>
             </div>
           </div>
-          <div class="col-6 col-sm-6">
+          <div class="col-6 col-sm-6" style="text-align: center">
             <div>
               <nb-select [(ngModel)]="selectedCityModel" (selectedChange)="selectedCityChanged('radar')">
                 <nb-option *ngFor="let item of selectedState.cities" value="{{item.value}}">{{item.title}}</nb-option>
