@@ -22,7 +22,7 @@ import { WindowModeBlockScrollService } from '../../services/window-mode-block-s
       </nb-layout-column>
 
       <nb-layout-footer fixed>
-        <ngx-footer></ngx-footer>
+        <ngx-footer style="text-align: center"></ngx-footer>
       </nb-layout-footer>
     </nb-layout>
   `,
