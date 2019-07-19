@@ -14,6 +14,8 @@ export class EchartsMultipleXaxisComponent implements AfterViewInit, OnDestroy, 
   echartsIntance: any;
   colors;
   echarts;
+  oldData = [];
+  themeChanged = false;
 
   constructor(private theme: NbThemeService) {
   }
@@ -36,7 +38,7 @@ export class EchartsMultipleXaxisComponent implements AfterViewInit, OnDestroy, 
   }
 
   drawAgain (data) {
-    this.echartsIntance.setOption(this.getOptions());
+    this.echartsIntance.setOption(this.getOptions(false));
   }
 
   ngOnDestroy() {
@@ -44,7 +46,7 @@ export class EchartsMultipleXaxisComponent implements AfterViewInit, OnDestroy, 
     this.themeSubscription.unsubscribe();
   }
 
-  getOptions () {
+  getOptions (justThemeChanged) {
     return {
       backgroundColor: this.echarts.bg,
       color: [this.colors.success, this.colors.info],
@@ -174,19 +176,21 @@ export class EchartsMultipleXaxisComponent implements AfterViewInit, OnDestroy, 
           type: 'line',
           xAxisIndex: 1,
           smooth: true,
-          data: [this.randomNumber(2, 200), this.randomNumber(2, 200), this.randomNumber(2, 200),
+          data: !justThemeChanged ? this.oldData[0] = [this.randomNumber(2, 200),
+            this.randomNumber(2, 200), this.randomNumber(2, 200),
             this.randomNumber(2, 200), this.randomNumber(2, 200), this.randomNumber(2, 200),
             this.randomNumber(2, 200), this.randomNumber(2, 200), this.randomNumber(2, 200),
-            this.randomNumber(2, 200), this.randomNumber(2, 200), this.randomNumber(2, 200)],
+            this.randomNumber(2, 200), this.randomNumber(2, 200), this.randomNumber(2, 200)] : this.oldData[0],
         },
         {
           name: 'بلیط هواپیما',
           type: 'line',
           smooth: true,
-          data: [this.randomNumber(2, 200), this.randomNumber(2, 200), this.randomNumber(2, 200),
+          data: !justThemeChanged ? this.oldData[1] = [this.randomNumber(2, 200),
+            this.randomNumber(2, 200), this.randomNumber(2, 200),
             this.randomNumber(2, 200), this.randomNumber(2, 200), this.randomNumber(2, 200),
             this.randomNumber(2, 200), this.randomNumber(2, 200), this.randomNumber(2, 200),
-            this.randomNumber(2, 200), this.randomNumber(2, 200), this.randomNumber(2, 200)],
+            this.randomNumber(2, 200), this.randomNumber(2, 200), this.randomNumber(2, 200)] : this.oldData[1],
         },
       ],
     };
@@ -198,7 +202,8 @@ export class EchartsMultipleXaxisComponent implements AfterViewInit, OnDestroy, 
       this.colors = config.variables;
       this.echarts = config.variables.echarts;
 
-      this.options = this.getOptions();
+      this.options = this.getOptions(this.themeChanged);
+      this.themeChanged = true;
     });
   }
 }

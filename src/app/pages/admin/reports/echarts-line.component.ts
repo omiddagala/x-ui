@@ -14,6 +14,8 @@ export class EchartsLineComponent implements AfterViewInit, OnDestroy, OnInit {
   echartsIntance: any;
   colors;
   echarts;
+  oldData = [];
+  themeChanged = false;
 
   constructor(private theme: NbThemeService) {
   }
@@ -36,7 +38,7 @@ export class EchartsLineComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   drawAgain (data) {
-    this.echartsIntance.setOption(this.getOptions());
+    this.echartsIntance.setOption(this.getOptions(false));
   }
 
   ngOnDestroy() {
@@ -44,7 +46,7 @@ export class EchartsLineComponent implements AfterViewInit, OnDestroy, OnInit {
     this.themeSubscription.unsubscribe();
   }
 
-  getOptions () {
+  getOptions (justThemeChanged) {
     return {
       backgroundColor: this.echarts.bg,
       color: [this.colors.danger, this.colors.primary, this.colors.info],
@@ -109,23 +111,26 @@ export class EchartsLineComponent implements AfterViewInit, OnDestroy, OnInit {
         {
           name: 'بیمه ثالث',
           type: 'line',
-          data: [this.randomNumber(10, 500), this.randomNumber(10, 500), this.randomNumber(10, 500),
+          data: !justThemeChanged ? this.oldData[0] = [this.randomNumber(10, 500),
+            this.randomNumber(10, 500), this.randomNumber(10, 500),
             this.randomNumber(10, 500), this.randomNumber(10, 500), this.randomNumber(10, 500),
-            this.randomNumber(10, 500), this.randomNumber(10, 500), this.randomNumber(10, 500)],
+            this.randomNumber(10, 500), this.randomNumber(10, 500), this.randomNumber(10, 500)] : this.oldData[0],
         },
         {
           name: 'بیمه عمر',
           type: 'line',
-          data: [this.randomNumber(10, 500), this.randomNumber(10, 500), this.randomNumber(10, 500),
+          data: !justThemeChanged ? this.oldData[1] = [this.randomNumber(10, 500),
+            this.randomNumber(10, 500), this.randomNumber(10, 500),
             this.randomNumber(10, 500), this.randomNumber(10, 500), this.randomNumber(10, 500),
-            this.randomNumber(10, 500), this.randomNumber(10, 500), this.randomNumber(10, 500)],
+            this.randomNumber(10, 500), this.randomNumber(10, 500), this.randomNumber(10, 500)] : this.oldData[1],
         },
         {
           name: 'بلیط هواپیما',
           type: 'line',
-          data: [this.randomNumber(10, 500), this.randomNumber(10, 500), this.randomNumber(10, 500),
+          data: !justThemeChanged ? this.oldData[2] = [this.randomNumber(10, 500),
+            this.randomNumber(10, 500), this.randomNumber(10, 500),
             this.randomNumber(10, 500), this.randomNumber(10, 500), this.randomNumber(10, 500),
-            this.randomNumber(10, 500), this.randomNumber(10, 500), this.randomNumber(10, 500)],
+            this.randomNumber(10, 500), this.randomNumber(10, 500), this.randomNumber(10, 500)] : this.oldData[2],
         },
       ],
     };
@@ -137,7 +142,8 @@ export class EchartsLineComponent implements AfterViewInit, OnDestroy, OnInit {
       this.colors = config.variables;
       this.echarts = config.variables.echarts;
 
-      this.options = this.getOptions();
+      this.options = this.getOptions(this.themeChanged);
+      this.themeChanged = true;
     });
   }
 }

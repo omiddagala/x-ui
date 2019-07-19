@@ -14,6 +14,8 @@ export class EchartsBarComponent implements AfterViewInit, OnDestroy, OnInit {
   echartsIntance: any;
   colors;
   echarts;
+  oldData;
+  themeChanged = false;
 
   constructor(private theme: NbThemeService) {
   }
@@ -36,7 +38,7 @@ export class EchartsBarComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   drawAgain (data) {
-    this.echartsIntance.setOption(this.getOptions());
+    this.echartsIntance.setOption(this.getOptions(false));
   }
 
   ngOnDestroy() {
@@ -44,7 +46,7 @@ export class EchartsBarComponent implements AfterViewInit, OnDestroy, OnInit {
     this.themeSubscription.unsubscribe();
   }
 
-  getOptions () {
+  getOptions (justThemeChanged) {
     return {
       backgroundColor: this.echarts.bg,
       color: [this.colors.primaryLight],
@@ -106,9 +108,10 @@ export class EchartsBarComponent implements AfterViewInit, OnDestroy, OnInit {
           name: 'تعداد',
           type: 'bar',
           barWidth: '60%',
-          data: [this.randomNumber(50, 350), this.randomNumber(50, 350), this.randomNumber(50, 350),
+          data: !justThemeChanged ? this.oldData = [this.randomNumber(50, 350),
+            this.randomNumber(50, 350), this.randomNumber(50, 350),
             this.randomNumber(50, 350), this.randomNumber(50, 350), this.randomNumber(50, 350),
-            this.randomNumber(50, 350)],
+            this.randomNumber(50, 350)] : this.oldData,
         },
       ],
     };
@@ -120,7 +123,8 @@ export class EchartsBarComponent implements AfterViewInit, OnDestroy, OnInit {
       this.colors = config.variables;
       this.echarts = config.variables.echarts;
 
-      this.options = this.getOptions();
+      this.options = this.getOptions(this.themeChanged);
+      this.themeChanged = true;
     });
   }
 }

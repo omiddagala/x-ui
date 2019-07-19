@@ -14,6 +14,8 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy, OnInit {
   echartsIntance: any;
   colors;
   echarts;
+  oldData;
+  themeChanged = false;
 
   constructor(private theme: NbThemeService) {
   }
@@ -31,7 +33,7 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy, OnInit {
       { value: this.randomNumber(100, 999), name: 'بیمه ثالث' },
     ];
   }
-  getOptions () {
+  getOptions (justThemeChanged) {
     return {
       backgroundColor: echarts.bg,
       color: [this.colors.warningLight, this.colors.infoLight,
@@ -54,7 +56,7 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy, OnInit {
           type: 'pie',
           radius: '80%',
           center: ['50%', '50%'],
-          data: this.generateData(),
+          data: !justThemeChanged ? this.oldData = this.generateData() : this.oldData,
           itemStyle: {
             emphasis: {
               shadowBlur: 10,
@@ -95,7 +97,7 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   drawAgain (data) {
-    this.echartsIntance.setOption(this.getOptions());
+    this.echartsIntance.setOption(this.getOptions(false));
   }
 
   ngOnDestroy() {
@@ -109,7 +111,8 @@ export class EchartsPieComponent implements AfterViewInit, OnDestroy, OnInit {
       this.colors = config.variables;
       this.echarts = config.variables.echarts;
 
-      this.options = this.getOptions();
+      this.options = this.getOptions(this.themeChanged);
+      this.themeChanged = true;
     });
   }
 }

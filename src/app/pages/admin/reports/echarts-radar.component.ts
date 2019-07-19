@@ -14,6 +14,8 @@ export class EchartsRadarComponent implements AfterViewInit, OnDestroy, OnInit {
   echartsIntance: any;
   colors;
   echarts;
+  oldData;
+  themeChanged = false;
 
   constructor(private theme: NbThemeService) {
   }
@@ -36,7 +38,7 @@ export class EchartsRadarComponent implements AfterViewInit, OnDestroy, OnInit {
   }
 
   drawAgain (data) {
-    this.echartsIntance.setOption(this.getOptions());
+    this.echartsIntance.setOption(this.getOptions(false));
   }
 
   ngOnDestroy() {
@@ -49,7 +51,7 @@ export class EchartsRadarComponent implements AfterViewInit, OnDestroy, OnInit {
       this.randomNumber(20000, 52000), this.randomNumber(8000, 25000)];
   }
 
-  getOptions () {
+  getOptions (justThemeChanged) {
     return {
       backgroundColor: this.echarts.bg,
       color: [this.colors.danger, this.colors.warning],
@@ -84,7 +86,7 @@ export class EchartsRadarComponent implements AfterViewInit, OnDestroy, OnInit {
         {
           name: 'هزینه درمقابل درامد',
           type: 'radar',
-          data: [
+          data: !justThemeChanged ? this.oldData = [
             {
               value: this.generateData(),
               name: 'هزینه',
@@ -93,7 +95,7 @@ export class EchartsRadarComponent implements AfterViewInit, OnDestroy, OnInit {
               value: this.generateData(),
               name: 'درامد',
             },
-          ],
+          ] : this.oldData,
         },
       ],
     };
@@ -105,7 +107,8 @@ export class EchartsRadarComponent implements AfterViewInit, OnDestroy, OnInit {
       this.colors = config.variables;
       this.echarts = config.variables.echarts;
 
-      this.options = this.getOptions();
+      this.options = this.getOptions(this.themeChanged);
+      this.themeChanged = true;
     });
   }
 }

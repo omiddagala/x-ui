@@ -14,6 +14,8 @@ export class EchartsAreaStackComponent implements AfterViewInit, OnDestroy, OnIn
   echartsIntance: any;
   colors;
   echarts;
+  oldData = [];
+  themeChanged = false;
 
   constructor(private theme: NbThemeService) {
   }
@@ -36,7 +38,7 @@ export class EchartsAreaStackComponent implements AfterViewInit, OnDestroy, OnIn
   }
 
   drawAgain (data) {
-    this.echartsIntance.setOption(this.getOptions());
+    this.echartsIntance.setOption(this.getOptions(false));
   }
 
   ngOnDestroy() {
@@ -44,7 +46,7 @@ export class EchartsAreaStackComponent implements AfterViewInit, OnDestroy, OnIn
     this.themeSubscription.unsubscribe();
   }
 
-  getOptions () {
+  getOptions (justThemeChanged) {
     return {
       backgroundColor: this.echarts.bg,
       color: [this.colors.warningLight, this.colors.infoLight,
@@ -117,36 +119,40 @@ export class EchartsAreaStackComponent implements AfterViewInit, OnDestroy, OnIn
           type: 'line',
           stack: 'Total amount',
           areaStyle: { normal: { opacity: this.echarts.areaOpacity } },
-          data: [this.randomNumber(100, 500), this.randomNumber(100, 500), this.randomNumber(100, 500)
+          data: !justThemeChanged ? this.oldData[0] = [this.randomNumber(100, 500),
+            this.randomNumber(100, 500), this.randomNumber(100, 500)
             , this.randomNumber(100, 500), this.randomNumber(100, 500), this.randomNumber(100, 500),
-            this.randomNumber(100, 500)],
+            this.randomNumber(100, 500)] : this.oldData[0],
         },
         {
           name: 'بیمه عمر',
           type: 'line',
           stack: 'Total amount',
           areaStyle: { normal: { opacity: this.echarts.areaOpacity } },
-          data: [this.randomNumber(100, 500), this.randomNumber(100, 500), this.randomNumber(100, 500)
+          data: !justThemeChanged ? this.oldData[1] = [this.randomNumber(100, 500),
+            this.randomNumber(100, 500), this.randomNumber(100, 500)
             , this.randomNumber(100, 500), this.randomNumber(100, 500), this.randomNumber(100, 500),
-            this.randomNumber(100, 500)],
+            this.randomNumber(100, 500)] : this.oldData[1],
         },
         {
           name: 'بلیط هواپیما',
           type: 'line',
           stack: 'Total amount',
           areaStyle: { normal: { opacity: this.echarts.areaOpacity } },
-          data: [this.randomNumber(100, 500), this.randomNumber(100, 500), this.randomNumber(100, 500)
+          data: !justThemeChanged ? this.oldData[2] = [this.randomNumber(100, 500),
+            this.randomNumber(100, 500), this.randomNumber(100, 500)
             , this.randomNumber(100, 500), this.randomNumber(100, 500), this.randomNumber(100, 500),
-            this.randomNumber(100, 500)],
+            this.randomNumber(100, 500)] : this.oldData[2],
         },
         {
           name: 'بلیط قطار',
           type: 'line',
           stack: 'Total amount',
           areaStyle: { normal: { opacity: this.echarts.areaOpacity } },
-          data: [this.randomNumber(100, 500), this.randomNumber(100, 500), this.randomNumber(100, 500)
+          data: !justThemeChanged ? this.oldData[3] = [this.randomNumber(100, 500),
+            this.randomNumber(100, 500), this.randomNumber(100, 500)
             , this.randomNumber(100, 500), this.randomNumber(100, 500), this.randomNumber(100, 500),
-            this.randomNumber(100, 500)],
+            this.randomNumber(100, 500)] : this.oldData[3],
         },
         {
           name: 'بلیط اتوبوس',
@@ -162,9 +168,10 @@ export class EchartsAreaStackComponent implements AfterViewInit, OnDestroy, OnIn
             },
           },
           areaStyle: { normal: { opacity: this.echarts.areaOpacity } },
-          data: [this.randomNumber(100, 500), this.randomNumber(100, 500), this.randomNumber(100, 500)
+          data: !justThemeChanged ? this.oldData[4] = [this.randomNumber(100, 500),
+            this.randomNumber(100, 500), this.randomNumber(100, 500)
             , this.randomNumber(100, 500), this.randomNumber(100, 500), this.randomNumber(100, 500),
-            this.randomNumber(100, 500)],
+            this.randomNumber(100, 500)] : this.oldData[4],
         },
       ],
     };
@@ -176,7 +183,8 @@ export class EchartsAreaStackComponent implements AfterViewInit, OnDestroy, OnIn
       this.colors = config.variables;
       this.echarts = config.variables.echarts;
 
-      this.options = this.getOptions();
+      this.options = this.getOptions(this.themeChanged);
+      this.themeChanged = true;
     });
   }
 }

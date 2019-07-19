@@ -17,6 +17,7 @@ export class EchartsBarAnimationComponent implements AfterViewInit, OnDestroy, O
   xAxisData = [];
   data1 = [];
   data2 = [];
+  themeChanged = false;
 
   constructor(private theme: NbThemeService) {
   }
@@ -39,23 +40,36 @@ export class EchartsBarAnimationComponent implements AfterViewInit, OnDestroy, O
   }
 
   drawAgain (data) {
-    this.generateData();
-    this.echartsIntance.setOption(this.getOptions());
+    this.generateDataX();
+    this.generateData1();
+    this.generateData2();
+    this.echartsIntance.setOption(this.getOptions(false));
   }
 
   ngOnDestroy() {
     this.eventsSubscription.unsubscribe();
     this.themeSubscription.unsubscribe();
   }
-  generateData () {
+  generateDataX () {
     for (let i = 0; i < 100; i++) {
       this.xAxisData.push('روز ' + i);
+    }
+    return this.xAxisData;
+  }
+  generateData1 () {
+    for (let i = 0; i < 100; i++) {
       this.data1.push((Math.sin(i / 5) * (i / 5 - 10) + i / 6) * 5);
+    }
+    return this.data1;
+  }
+  generateData2 () {
+    for (let i = 0; i < 100; i++) {
       this.data2.push((Math.cos(i / 5) * (i / 5 - 10) + i / 6) * 5);
     }
+    return this.data2;
   }
 
-  getOptions () {
+  getOptions (justThemeChanged) {
     return {
       backgroundColor: this.echarts.bg,
       color: [this.colors.primaryLight, this.colors.infoLight],
@@ -68,7 +82,7 @@ export class EchartsBarAnimationComponent implements AfterViewInit, OnDestroy, O
       },
       xAxis: [
         {
-          data: this.xAxisData,
+          data: !justThemeChanged ? this.generateDataX() : this.xAxisData,
           silent: false,
           axisTick: {
             alignWithLabel: true,
@@ -109,13 +123,13 @@ export class EchartsBarAnimationComponent implements AfterViewInit, OnDestroy, O
         {
           name: 'بیمه ثالث',
           type: 'bar',
-          data: this.data1,
+          data: !justThemeChanged ? this.generateData1() : this.data1,
           animationDelay: idx => idx * 10,
         },
         {
           name: 'بلیط هواپیما',
           type: 'bar',
-          data: this.data2,
+          data: !justThemeChanged ? this.generateData2() : this.data2,
           animationDelay: idx => idx * 10 + 100,
         },
       ],
@@ -126,15 +140,11 @@ export class EchartsBarAnimationComponent implements AfterViewInit, OnDestroy, O
 
   ngAfterViewInit() {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
-      this.xAxisData = [];
-      this.data1 = [];
-      this.data2 = [];
 
       this.colors = config.variables;
       this.echarts = config.variables.echarts;
-
-      this.options = this.getOptions();
-      this.generateData();
+      this.options = this.getOptions(this.themeChanged);
+      this.themeChanged = true;
     });
   }
 }
