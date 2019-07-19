@@ -21,6 +21,7 @@ import {
   NbWindowModule,
 } from '@nebular/theme';
 import {NgxAuthModule} from './pages/auth/auth.module';
+import {Globals} from './pages/commons/globals';
 
 @NgModule({
   declarations: [AppComponent],
@@ -45,6 +46,9 @@ import {NgxAuthModule} from './pages/auth/auth.module';
     NgxAuthModule,
   ],
   bootstrap: [AppComponent],
+  providers: [
+    Globals,
+  ],
 })
 export class AppModule {
 }
