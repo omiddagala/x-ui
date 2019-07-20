@@ -18,7 +18,7 @@ export class EchartsComponent {
   selectedState = this.states[0];
   selectedCityModel = 'tehran';
   selectedCity: any = this.states[0].cities[0];
-  private eventsSubject: Subject<any> = new Subject<any>();
+  eventsSubject: Subject<any> = new Subject<any>();
 
 
   selectedStateChanged (emitter) {
