@@ -1,6 +1,7 @@
 import {AfterViewInit, Component} from '@angular/core';
 import {Subject} from 'rxjs';
 import {NbComponentStatus, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrService} from '@nebular/theme';
+import {Globals} from '../../commons/globals';
 
 @Component({
   selector: 'ngx-echarts',
@@ -15,9 +16,12 @@ export class EchartsComponent implements AfterViewInit {
   preventDuplicates = false;
   status: NbComponentStatus = 'success';
 
-  constructor(private toastrService: NbToastrService) {}
+  constructor(private toastrService: NbToastrService, private globals: Globals) {}
   ngAfterViewInit(): void {
-    this.showToast('پیام', 'شما موفق به ورود به سیستم شدید');
+    if (this.globals.isComingFromLogin) {
+      this.showToast('پیام', 'شما موفق به ورود به سیستم شدید');
+      this.globals.isComingFromLogin = false;
+    }
   }
 
   states = [{title: 'تهران', value: 'tehran',

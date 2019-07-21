@@ -66,6 +66,7 @@ export class NgxLoginComponent extends NbLoginComponent {
       ]);
     }
     localStorage.setItem('menu', JSON.stringify(this.globals.getMenu()));
+    this.globals.isComingFromLogin = true;
     if (this.user.username === 'admin') {
       this.router.navigate(['/pages/admin/reports']);
     } else {

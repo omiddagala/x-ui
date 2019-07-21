@@ -1,6 +1,7 @@
 import {AfterViewInit, Component} from '@angular/core';
 import {MyRoutingService} from '../commons/my.routing.service';
 import {NbComponentStatus, NbGlobalPhysicalPosition, NbGlobalPosition, NbToastrService} from '@nebular/theme';
+import {Globals} from '../commons/globals';
 
 @Component({
   selector: 'ngx-ref-home',
@@ -16,14 +17,18 @@ export class HomeComponent implements AfterViewInit {
   preventDuplicates = false;
   status: NbComponentStatus = 'success';
 
-  constructor(private myRoutingService: MyRoutingService, private toastrService: NbToastrService) {}
+  constructor(private myRoutingService: MyRoutingService, private toastrService: NbToastrService,
+              private globals: Globals) {}
 
   gotoWhereClicked(adr) {
     this.myRoutingService.gotoWhereClicked(adr);
   }
 
   ngAfterViewInit(): void {
-    this.showToast('پیام', 'شما موفق به ورود به سیستم شدید');
+    if (this.globals.isComingFromLogin) {
+      this.showToast('پیام', 'شما موفق به ورود به سیستم شدید');
+      this.globals.isComingFromLogin = false;
+    }
   }
 
 

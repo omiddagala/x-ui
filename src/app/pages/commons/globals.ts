@@ -5,6 +5,7 @@ export class Globals {
 
   constructor() {}
   private menu;
+  isComingFromLogin: boolean = false;
   getMenu() {
     return this.menu;
   }
