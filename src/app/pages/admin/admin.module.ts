@@ -5,7 +5,6 @@ import {AdminRoutingModule} from './admin-routing.module';
 import {NbCardModule, NbSelectModule} from '@nebular/theme';
 import {Ng2SmartTableModule} from 'ng2-smart-table';
 import {AdminUsersListComponent} from './users/list.component';
-import {ChartsModule} from '../charts/charts.module';
 import {ChartModule} from 'angular2-chartjs';
 import {EchartsComponent} from './reports/echarts.component';
 import {EchartsMultipleXaxisComponent} from './reports/echarts-multiple-xaxis.component';
@@ -24,7 +23,6 @@ import {EchartsLineComponent} from './reports/echarts-line.component';
     AdminRoutingModule,
     NbCardModule,
     Ng2SmartTableModule,
-    ChartsModule,
     ChartModule,
     NgxEchartsModule,
     NbSelectModule,
