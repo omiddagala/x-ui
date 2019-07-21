@@ -4,7 +4,7 @@ import { Globals } from './commons/globals';
 
 @Component({
   selector: 'ngx-pages',
-  styleUrls: ['pages.component.scss'],
+  styleUrls: ['pages.component.scss', './commons/tables.scss'],
   template: `
     <ngx-one-column-layout>
       <nb-menu [items]="menu"></nb-menu>

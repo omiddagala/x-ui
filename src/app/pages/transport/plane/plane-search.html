@@ -1,0 +1,49 @@
+<nb-card>
+  <nb-card-header>
+    جستجوی تمامی خطوط هوایی
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="row show-grid">
+      <div class="col-6 col-md-2">
+        <nb-select placeholder="مبدا" status="success">
+          <nb-option value="1">تهران</nb-option>
+          <nb-option value="2">شیراز</nb-option>
+          <nb-option value="2">اصفهان</nb-option>
+        </nb-select>
+      </div>
+      <div class="col-6 col-md-2">
+        <nb-select placeholder="مقصد" status="success">
+          <nb-option value="1">تهران</nb-option>
+          <nb-option value="2">شیراز</nb-option>
+          <nb-option value="2">اصفهان</nb-option>
+        </nb-select>
+      </div>
+      <div class="col-6 col-md-2">
+        <input type="text" nbInput fullWidth status="success"  placeholder="تاریخ رفت">
+      </div>
+      <div class="col-6 col-md-2">
+        <input type="text" nbInput fullWidth status="success"  placeholder="تاریخ برگشت">
+      </div>
+      <div class="col-6 col-md-2">
+        <input type="text" nbInput fullWidth status="success"  placeholder="تعداد">
+      </div>
+      <div class="col-6 col-md-2">
+        <button (click)="search()" nbButton [status]="'warning'" hero>
+          جستجو
+        </button>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>
+
+<nb-card>
+  <nb-card-header>
+    نتیجه
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings" [source]="source">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

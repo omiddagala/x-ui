@@ -26,6 +26,11 @@ const routes: Routes = [{
         .then(m => m.InsuranceModule),
     },
     {
+      path: 'transport',
+      loadChildren: () => import('./transport/transport.module')
+        .then(m => m.TransportModule),
+    },
+    {
       path: 'dashboard',
       component: ECommerceComponent,
     },

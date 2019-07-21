@@ -48,7 +48,7 @@ export class AdminUsersListComponent {
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private service: SmartTableData) {
+  constructor() {
     const data = [{
       name: 'علیرضا',
       family: 'قایخلو',

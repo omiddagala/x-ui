@@ -1,0 +1,26 @@
+::ng-deep ng2-smart-table {
+  direction: ltr;
+  text-align: center;
+}
+::ng-deep ng2-smart-table-filter input {
+  text-align: right;
+}
+::ng-deep ::-webkit-input-placeholder {
+  text-align: center;
+}
+::ng-deep ::-moz-placeholder {
+  text-align: center;
+}
+::ng-deep :-ms-input-placeholder {
+  text-align: center;
+}
+::ng-deep :-moz-placeholder {
+  text-align: center;
+}
+::ng-deep checkbox-filter input {
+  width: 25% !important;
+  margin: 0 auto !important;
+}
+::ng-deep checkbox-filter input:focus {
+  box-shadow: none !important;
+}

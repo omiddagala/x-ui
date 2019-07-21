@@ -30,7 +30,7 @@ export class IconsComponent {
       'drag', 'log-in', 'log-out', 'checkmark-round', 'checkmark', 'checkmark-circled',
       'close-round', 'plus-round', 'minus-round', 'information', 'help',
       'backspace-outline', 'help-buoy', 'asterisk', 'alert', 'alert-circled',
-      'refresh', 'loop', 'shuffle', 'home', 'search', 'flag', 'star',
+      'refresh', 'loop', 'shuffle', 'home', 'transport-search.html', 'flag', 'star',
       'heart', 'heart-broken', 'gear-a', 'gear-b', 'toggle-filled', 'toggle',
       'settings', 'wrench', 'hammer', 'edit', 'trash-a', 'trash-b',
       'document', 'document-text', 'clipboard', 'scissors', 'funnel',
