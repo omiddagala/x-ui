@@ -14,6 +14,7 @@ import {
 import {BuyTicketButtonComponent} from './plane/buy-ticket-button.component';
 import {MoreInfoButtonComponent} from './plane/more-info-button.component';
 import {MoreInfoPopupComponent} from './plane/more-info-popup/more-info-popup.component';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import {MoreInfoPopupComponent} from './plane/more-info-popup/more-info-popup.co
     NbInputModule,
     NbDialogModule.forChild(),
     NbTabsetModule,
+    CommonModule,
   ],
   declarations: [
     TransportMenuComponent,

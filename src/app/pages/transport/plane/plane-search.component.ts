@@ -9,6 +9,7 @@ import {MoreInfoButtonComponent} from './more-info-button.component';
   templateUrl: './plane-search.html',
 })
 export class PlaneSearchComponent {
+  showResult: boolean = false;
 
   search() {
     const data = [{
@@ -35,6 +36,7 @@ export class PlaneSearchComponent {
         arrival: 'پنجشنبه ۶ مرداد ۱:۱۵',
         type: 'سیستمی',
       }];
+    this.showResult = true;
     this.source.load(data);
   }
 
