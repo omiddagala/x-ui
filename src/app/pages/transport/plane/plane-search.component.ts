@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {MyRoutingService} from '../../commons/my.routing.service';
 import {LocalDataSource} from 'ng2-smart-table';
 import {BuyTicketButtonComponent} from './buy-ticket-button.component';
+import {MoreInfoButtonComponent} from './more-info-button.component';
 
 @Component({
   selector: 'ngx-transport-plane',
@@ -52,11 +53,11 @@ export class PlaneSearchComponent {
         filter: false,
       },
       more: {
-        title: '',
-        type: 'html',
-        valuePrepareFunction: () => {
-          return '<a>اطلاعات بیشتر</a>'; },
+        title: 'اطلاعات پرواز',
+        type: 'custom',
+        renderComponent: MoreInfoButtonComponent,
         filter: false,
+        width: '130px',
       },
       type: {
         title: 'نوع',
