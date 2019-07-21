@@ -67,7 +67,12 @@
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="numOfChecks" class="label">تعداد چک</label>
-                <input type="text" nbInput fullWidth id="numOfChecks" name="numOfChecks" [(ngModel)]="numOfChecks">
+                <nb-select fullWidth id="numOfChecks" selected="1">
+                  <nb-option value="1">1</nb-option>
+                  <nb-option value="2">2</nb-option>
+                  <nb-option value="3">3</nb-option>
+                  <nb-option value="4">4</nb-option>
+                </nb-select>
               </div>
             </div>
           </div>
