@@ -19,20 +19,20 @@ export class NgxLoginComponent extends NbLoginComponent {
     if (this.user.username === 'admin') {
       this.globals.setMenu([
         {
+          title: 'گزارشات',
+          icon: 'pie-chart-outline',
+          link: '/pages/admin/reports',
+        },
+        {
           title: 'مدیریت محصول',
           icon: 'home-outline',
-          link: '/pages/admin',
+          link: '/pages/admin/product',
           home: true,
         },
         {
           title: 'مدیریت کاربران',
           icon: 'keypad-outline',
           link: '/pages/admin/users',
-        },
-        {
-          title: 'گزارشات',
-          icon: 'pie-chart-outline',
-          link: '/pages/admin/reports',
         },
         {
           title: 'خروج',
@@ -67,7 +67,7 @@ export class NgxLoginComponent extends NbLoginComponent {
     }
     localStorage.setItem('menu', JSON.stringify(this.globals.getMenu()));
     if (this.user.username === 'admin') {
-      this.router.navigate(['/pages/admin']);
+      this.router.navigate(['/pages/admin/reports']);
     } else {
       this.router.navigate(['/pages/home']);
     }

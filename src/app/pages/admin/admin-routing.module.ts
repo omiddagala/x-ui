@@ -6,7 +6,7 @@ import {EchartsComponent} from './reports/echarts.component';
 
 
 const routes: Routes = [{
-  path: '',
+  path: 'product',
   component: AdminProductListComponent,
 },
   {
@@ -16,6 +16,10 @@ const routes: Routes = [{
   {
     path: 'reports',
     component: EchartsComponent,
+  },
+  {
+    path: '',
+    redirectTo: 'reports',
   }];
 
 @NgModule({
