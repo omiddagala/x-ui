@@ -10,6 +10,6 @@ export class ThirdPersonPaymentComponent {
 
   constructor() {}
   paymentType = 'cash';
-  numOfChecks: number = 0;
+  numOfChecks: string = '1';
   prePayment = '5,600,000';
 }

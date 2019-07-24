@@ -18,8 +18,6 @@ import {HomeModule} from './home/home.module';
   declarations: [
     PagesComponent,
   ],
-
-
 })
 export class PagesModule {
 }

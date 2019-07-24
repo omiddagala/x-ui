@@ -67,7 +67,7 @@
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="numOfChecks" class="label">تعداد چک</label>
-                <nb-select fullWidth id="numOfChecks" selected="1">
+                <nb-select name="numOfChecks" [(ngModel)]="numOfChecks" fullWidth id="numOfChecks" selected="1">
                   <nb-option value="1">1</nb-option>
                   <nb-option value="2">2</nb-option>
                   <nb-option value="3">3</nb-option>
@@ -86,7 +86,7 @@
             لطفا تصاویر چک تکمیل شده را در این قسمت ارسال کنید و اصل آنرا تحویل دفاتر نظام مهندسی شهرستان خود کنید.
           </p>
           <div class="row">
-            <div class="col-sm-3" style="text-align: center" *ngIf="numOfChecks == 1 || numOfChecks == 2 || numOfChecks == 3 || numOfChecks == 4">
+            <div class="col-sm-3" style="text-align: center" *ngIf="numOfChecks == '1' || numOfChecks == '2' || numOfChecks == '3' || numOfChecks == '4'">
               <div class="form-group">
                 <input hidden type="file" #uploader1>
                 <br>
@@ -95,7 +95,7 @@
                 </button>
               </div>
             </div>
-            <div class="col-sm-3" style="text-align: center" *ngIf="numOfChecks == 2 || numOfChecks == 3 || numOfChecks == 4">
+            <div class="col-sm-3" style="text-align: center" *ngIf="numOfChecks == '2' || numOfChecks == '3' || numOfChecks == '4'">
               <div class="form-group">
                 <input hidden type="file" #uploader2>
                 <br>
@@ -104,7 +104,7 @@
                 </button>
               </div>
             </div>
-            <div class="col-sm-3" style="text-align: center" *ngIf="numOfChecks == 3 || numOfChecks == 4">
+            <div class="col-sm-3" style="text-align: center" *ngIf="numOfChecks == '3' || numOfChecks == '4'">
               <div class="form-group">
                 <input hidden type="file" #uploader3>
                 <br>
@@ -113,7 +113,7 @@
                 </button>
               </div>
             </div>
-            <div class="col-sm-3" style="text-align: center" *ngIf="numOfChecks == 4">
+            <div class="col-sm-3" style="text-align: center" *ngIf="numOfChecks == '4'">
               <div class="form-group">
                 <input hidden type="file" #uploader4>
                 <br>
