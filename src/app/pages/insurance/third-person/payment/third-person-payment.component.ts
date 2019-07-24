@@ -1,6 +1,4 @@
 import {Component} from '@angular/core';
-import {MyRoutingService} from '../../../commons/my.routing.service';
-import {FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'ngx-ref-insurance-third-person-payment',
